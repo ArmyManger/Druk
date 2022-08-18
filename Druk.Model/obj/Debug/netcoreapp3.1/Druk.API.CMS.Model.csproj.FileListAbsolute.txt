@@ -1,0 +1,6 @@
+D:\学习区\druk-make\Druk\Druk.Model\obj\Debug\netcoreapp3.1\Druk.API.CMS.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\学习区\druk-make\Druk\Druk.Model\obj\Debug\netcoreapp3.1\Druk.API.CMS.Model.AssemblyInfoInputs.cache
+D:\学习区\druk-make\Druk\Druk.Model\obj\Debug\netcoreapp3.1\Druk.API.CMS.Model.AssemblyInfo.cs
+D:\学习区\druk-make\Druk\Druk.Model\obj\Debug\netcoreapp3.1\Druk.API.CMS.Model.csproj.CoreCompileInputs.cache
+D:\学习区\druk-make\Druk\Druk.Model\obj\Debug\netcoreapp3.1\Druk.API.CMS.Model.dll
+D:\学习区\druk-make\Druk\Druk.Model\obj\Debug\netcoreapp3.1\Druk.API.CMS.Model.pdb

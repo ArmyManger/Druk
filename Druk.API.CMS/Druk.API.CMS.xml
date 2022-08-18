@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Druk.API.CMS</name>
+    </assembly>
+    <members>
+        <member name="T:Druk.API.CMS.Controllers.AdminController">
+            <summary>
+            管理员
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Controllers.AdminController.login">
+            <summary>
+            管理员登录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Druk.API.CMS.Controllers.UserController">
+             <summary>
+            用户
+             </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Controllers.UserController.Add(Druk.API.CMS.Model.UserModel)">
+            <summary>
+            新增用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Druk.API.CMS.Controllers.UserController.List">
+            <summary>
+            用户列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Druk.API.CMS.Startup">
+            <summary>
+            启动
+            </summary>
+        </member>
+        <member name="T:Druk.API.CMS.Util.AuthorizeFilter">
+            <summary>
+            过滤器
+            </summary>
+        </member>
+        <member name="T:Druk.API.CMS.Util.SwaggerSetUp">
+            <summary>
+            swagger启动类
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Util.SwaggerSetUp.AddSwaggerSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加服务
+            </summary>
+            <param name="services"></param>
+        </member>
+    </members>
+</doc>
