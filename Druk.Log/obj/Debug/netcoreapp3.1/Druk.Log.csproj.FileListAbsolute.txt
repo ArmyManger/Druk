@@ -1,0 +1,14 @@
+D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\log4net.config
+D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\Druk.Log.deps.json
+D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\Druk.Log.dll
+D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\Druk.Log.pdb
+D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\Druk.Common.dll
+D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\Druk.Common.pdb
+D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.csproj.AssemblyReference.cache
+D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.GeneratedMSBuildEditorConfig.editorconfig
+D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.AssemblyInfoInputs.cache
+D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.AssemblyInfo.cs
+D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.csproj.CoreCompileInputs.cache
+D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.csproj.CopyComplete
+D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.dll
+D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.pdb

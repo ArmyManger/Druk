@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Druk.API.Open", "Druk.API.Open\Druk.API.Open.csproj", "{3BC38BF0-948D-4A11-A335-B988DEBC3B00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Druk.API.Open", "Druk.API.Open\Druk.API.Open.csproj", "{3BC38BF0-948D-4A11-A335-B988DEBC3B00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Druk.API.CMS", "Druk.API.CMS\Druk.API.CMS.csproj", "{AD1EA103-7825-4DD5-95A6-CE61C607CB43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Druk.API.CMS", "Druk.API.CMS\Druk.API.CMS.csproj", "{AD1EA103-7825-4DD5-95A6-CE61C607CB43}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{ADB87E8A-A321-40F7-B296-7EC9FF22105A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Druk.API.CMS.Model", "Druk.API.CMS.Model\Druk.API.CMS.Model.csproj", "{60D31568-5FC9-49D4-BC1B-1A5FE9118A65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Druk.API.CMS.Model", "Druk.API.CMS.Model\Druk.API.CMS.Model.csproj", "{60D31568-5FC9-49D4-BC1B-1A5FE9118A65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Druk.Common", "Druk.Common\Druk.Common.csproj", "{CA314980-8DCB-408F-8DF0-2CE360D4F8B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Druk.Common", "Druk.Common\Druk.Common.csproj", "{CA314980-8DCB-408F-8DF0-2CE360D4F8B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Druk.Log", "Druk.Log\Druk.Log.csproj", "{9821B1E4-54C0-42BC-8B6A-0DC98C738452}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{CA314980-8DCB-408F-8DF0-2CE360D4F8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA314980-8DCB-408F-8DF0-2CE360D4F8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA314980-8DCB-408F-8DF0-2CE360D4F8B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9821B1E4-54C0-42BC-8B6A-0DC98C738452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9821B1E4-54C0-42BC-8B6A-0DC98C738452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9821B1E4-54C0-42BC-8B6A-0DC98C738452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9821B1E4-54C0-42BC-8B6A-0DC98C738452}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +48,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{60D31568-5FC9-49D4-BC1B-1A5FE9118A65} = {ADB87E8A-A321-40F7-B296-7EC9FF22105A}
 		{CA314980-8DCB-408F-8DF0-2CE360D4F8B1} = {ADB87E8A-A321-40F7-B296-7EC9FF22105A}
+		{9821B1E4-54C0-42BC-8B6A-0DC98C738452} = {ADB87E8A-A321-40F7-B296-7EC9FF22105A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26CFE817-0EAB-4A10-87B1-3815DAE07DC4}
