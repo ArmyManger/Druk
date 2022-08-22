@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Druk.Common\Druk.Common.csproj" />
+    <ProjectReference Include="..\Druk.RabbitMQ\Druk.RabbitMQ.csproj" />
   </ItemGroup>
 
   <ItemGroup>

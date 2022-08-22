@@ -72,13 +72,12 @@ namespace Druk.Log
                     break;
 
                 case "rabbitmq":
-                    //Log_Write_RabbitMQ(queue, suffix, threadName, logLevel, info, ttl);
+                    Log_Write_RabbitMQ(queue, suffix, threadName, logLevel, info, ttl);
                     break;
 
                 case "log4":
                     Log_Write_Log4Net(queue, logLevel, threadName, info);
-                    break;
-
+                    break; 
                 default:
                     Console.WriteLine("[" + DateTime.Now.ToString("MM-dd HH:mm:ss") + "]  " + info.ToJson());
                     break;
@@ -222,24 +221,24 @@ VALUES(@DateKey,@UserID,@UserCodeNo,@UserName,@Token,@ProfileToken,@BeginTime,@E
 
 
         #region //日志写 RabbitMQ
-        //static void Log_Write_RabbitMQ(RabbitQueue queue, string suffix, string threadName, LogLevel logLevel, object info, int TTL = 0)
-        //{
-        //    //推送至Rabbit队列,队列的发送是异步的
-        //    Rabbit.Delivery.Send(
-        //        queue,
-        //        suffix,
-        //        new Wathet.Common.Entity.LogEntity()
-        //        {
-        //            Program = queue.GetDesc(),
-        //            ThreadName = threadName,
-        //            Level = logLevel,
-        //            Body = info,
-        //            Time = DateTime.Now,
-        //            HandleTime = DateTime.Now,
-        //        },
-        //        TTL
-        //    );
-        //}
+        static void Log_Write_RabbitMQ(RabbitQueue queue, string suffix, string threadName, LogLevel logLevel, object info, int TTL = 0)
+        {
+            //推送至Rabbit队列,队列的发送是异步的
+            RabbitMQ.Delivery.Send(
+                queue,
+                suffix,
+                new Druk.Common.Entity.LogEntity()
+                {
+                    Program = queue.GetDesc(),
+                    ThreadName = threadName,
+                    Level = logLevel,
+                    Body = info,
+                    Time = DateTime.Now,
+                    HandleTime = DateTime.Now,
+                },
+                TTL
+            );
+        }
         #endregion
 
         #region //日志写 Log4net

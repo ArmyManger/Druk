@@ -100,3 +100,5 @@ D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win-
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Aliyun.OSS.Core.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\ZKWeb.System.Drawing.dll

@@ -183,6 +183,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Aliyun.OSS.SDK.NetCore": {
+              "target": "Package",
+              "version": "[2.13.0, )"
+            },
             "HtmlSanitizer": {
               "target": "Package",
               "version": "[7.1.542, )"
@@ -206,6 +210,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.0, )"
+            },
+            "ZKWeb.System.Drawing": {
+              "target": "Package",
+              "version": "[4.0.1, )"
             }
           },
           "imports": [

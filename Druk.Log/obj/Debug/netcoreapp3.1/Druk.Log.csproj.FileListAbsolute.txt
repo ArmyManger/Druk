@@ -9,6 +9,7 @@ D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.Generate
 D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.AssemblyInfoInputs.cache
 D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.AssemblyInfo.cs
 D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.csproj.CoreCompileInputs.cache
-D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.csproj.CopyComplete
 D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.dll
 D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.pdb
+D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\Druk.RabbitMQ.dll
+D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\Druk.RabbitMQ.pdb
