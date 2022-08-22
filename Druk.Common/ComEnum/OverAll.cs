@@ -71,5 +71,19 @@ namespace Druk.Common
             禁用 = 5,
         }
         #endregion
+
+        #region //文件上传模式
+        /// <summary>
+        /// 上传模式
+        /// </summary>
+        public enum UploadMode
+        { 
+            [Description("本地文件服务器")]
+            本地文件服务器 = 1,
+            [Description("阿里OSS")]
+            阿里OSS = 2
+        }
+
+        #endregion
     }
 }
