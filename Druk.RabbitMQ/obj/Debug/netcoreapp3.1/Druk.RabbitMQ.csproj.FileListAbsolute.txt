@@ -1,0 +1,13 @@
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\bin\Debug\netcoreapp3.1\Druk.RabbitMQ.deps.json
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\bin\Debug\netcoreapp3.1\Druk.RabbitMQ.dll
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\bin\Debug\netcoreapp3.1\Druk.RabbitMQ.pdb
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\bin\Debug\netcoreapp3.1\Druk.Common.dll
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\bin\Debug\netcoreapp3.1\Druk.Common.pdb
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\obj\Debug\netcoreapp3.1\Druk.RabbitMQ.csproj.AssemblyReference.cache
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\obj\Debug\netcoreapp3.1\Druk.RabbitMQ.GeneratedMSBuildEditorConfig.editorconfig
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\obj\Debug\netcoreapp3.1\Druk.RabbitMQ.AssemblyInfoInputs.cache
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\obj\Debug\netcoreapp3.1\Druk.RabbitMQ.AssemblyInfo.cs
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\obj\Debug\netcoreapp3.1\Druk.RabbitMQ.csproj.CoreCompileInputs.cache
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\obj\Debug\netcoreapp3.1\Druk.RabbitMQ.csproj.CopyComplete
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\obj\Debug\netcoreapp3.1\Druk.RabbitMQ.dll
+D:\学习区\druk-make\Druk_M\Druk.RabbitMQ\obj\Debug\netcoreapp3.1\Druk.RabbitMQ.pdb
