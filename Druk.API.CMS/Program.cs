@@ -1,3 +1,4 @@
+using Druk.DataCache;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,10 @@ namespace Druk.API.CMS
     {
         public static void Main(string[] args)
         {
+            //Ω°øµºÏ≤È
+            //Druk.Operation.Health.Check(true, true);
+            //≥ı ºªØª∫¥Ê
+            Sys_Params.InitCache();
             CreateHostBuilder(args).Build().Run();
         }
 

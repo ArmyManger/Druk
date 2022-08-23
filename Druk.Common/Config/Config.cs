@@ -6,6 +6,11 @@ namespace Druk.Common
 {
     public class Config
     {
+        /// <summary>
+        /// 程序集名称
+        /// </summary>
+        public const string AssemblyFileName = "Druk.";
+
         #region //默认值设定
 
         /// <summary>
@@ -26,5 +31,10 @@ namespace Druk.Common
         public const int DefaultPageSize = 10;
 
         #endregion
+
+        /// <summary>
+        /// 检测当前运行版本
+        /// </summary>
+        public static string appVersion { get { return Environment.GetEnvironmentVariable("crm-environment-version") ?? ""; } } //"prod";//uat 
     }
 }

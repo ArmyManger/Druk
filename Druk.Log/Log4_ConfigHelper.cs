@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Druk.Log
+namespace Druk
 {
     public partial class Log
     {

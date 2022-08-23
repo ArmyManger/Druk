@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading; 
 using static Druk.Common.ComEnum;
 
-namespace Druk.Log
+namespace Druk
 {
     public partial class Log
     {

@@ -1,0 +1,10 @@
+D:\学习区\druk-make\Druk_M\Druk.DB\bin\Debug\netcoreapp3.1\Druk.DB.deps.json
+D:\学习区\druk-make\Druk_M\Druk.DB\bin\Debug\netcoreapp3.1\Druk.DB.dll
+D:\学习区\druk-make\Druk_M\Druk.DB\bin\Debug\netcoreapp3.1\Druk.DB.pdb
+D:\学习区\druk-make\Druk_M\Druk.DB\obj\Debug\netcoreapp3.1\Druk.DB.csproj.AssemblyReference.cache
+D:\学习区\druk-make\Druk_M\Druk.DB\obj\Debug\netcoreapp3.1\Druk.DB.GeneratedMSBuildEditorConfig.editorconfig
+D:\学习区\druk-make\Druk_M\Druk.DB\obj\Debug\netcoreapp3.1\Druk.DB.AssemblyInfoInputs.cache
+D:\学习区\druk-make\Druk_M\Druk.DB\obj\Debug\netcoreapp3.1\Druk.DB.AssemblyInfo.cs
+D:\学习区\druk-make\Druk_M\Druk.DB\obj\Debug\netcoreapp3.1\Druk.DB.csproj.CoreCompileInputs.cache
+D:\学习区\druk-make\Druk_M\Druk.DB\obj\Debug\netcoreapp3.1\Druk.DB.dll
+D:\学习区\druk-make\Druk_M\Druk.DB\obj\Debug\netcoreapp3.1\Druk.DB.pdb

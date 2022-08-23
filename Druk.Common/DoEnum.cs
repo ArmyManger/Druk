@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Druk.Common.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using static Druk.Common.JsonR;
 
 namespace Druk.Common
 {

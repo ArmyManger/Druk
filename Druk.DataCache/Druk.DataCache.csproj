@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
+    <PackageReference Include="VIEApps.Enyim.Caching" Version="5.0.2207.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Druk.Common\Druk.Common.csproj" />
+    <ProjectReference Include="..\Druk.DB\Druk.DB.csproj" />
+    <ProjectReference Include="..\Druk.Log\Druk.Log.csproj" />
+  </ItemGroup>
+
+</Project>
