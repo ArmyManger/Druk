@@ -102,3 +102,12 @@ D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\System.Text.Encoding.CodePages.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Aliyun.OSS.Core.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\ZKWeb.System.Drawing.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\NPOI.OOXML.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\NPOI.OpenXml4Net.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\NPOI.OpenXmlFormats.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\NPOI.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\ICSharpCode.SharpZipLib.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
