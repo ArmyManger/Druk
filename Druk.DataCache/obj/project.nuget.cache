@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "ig8JlUh3p8HGrzIu4/o1TiVdeXtfmxrvja/MDg2pEQ3v9+QraK/mNkDm0NgSM5YkVHg153xlCkN2WgeSSKgcZQ==",
+  "dgSpecHash": "A+hDMEdYzxjhgxrj8ncNz+CHkWqTQHInwygo4Reg2h40y80VFmBd3GIW/B7rrdxHv2mAbNo05fr6LBDsTboLLw==",
   "success": true,
   "projectFilePath": "D:\\学习区\\druk-make\\Druk_M\\Druk.DataCache\\Druk.DataCache.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\EDZ\\.nuget\\packages\\aliyun.oss.sdk.netcore\\2.13.0\\aliyun.oss.sdk.netcore.2.13.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\anglesharp\\0.17.1\\anglesharp.0.17.1.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\anglesharp.css\\0.16.4\\anglesharp.css.0.16.4.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\dapper\\2.0.35\\dapper.2.0.35.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\htmlsanitizer\\7.1.542\\htmlsanitizer.7.1.542.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
@@ -72,7 +73,7 @@
     "C:\\Users\\EDZ\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.reflection.emit\\4.3.0\\system.reflection.emit.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.3.0\\system.reflection.emit.ilgeneration.4.3.0.nupkg.sha512",
-    "C:\\Users\\EDZ\\.nuget\\packages\\system.reflection.emit.lightweight\\4.3.0\\system.reflection.emit.lightweight.4.3.0.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.reflection.extensions\\4.3.0\\system.reflection.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.reflection.typeextensions\\4.3.0\\system.reflection.typeextensions.4.3.0.nupkg.sha512",

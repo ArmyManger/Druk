@@ -152,3 +152,5 @@ D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.DataCach
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.DB.pdb
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.Log.pdb
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.RabbitMQ.pdb
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Dapper.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.MvcApplicationPartsAssemblyInfo.cs
