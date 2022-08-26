@@ -77,6 +77,14 @@
               "target": "Package",
               "version": "[4.8.0, )"
             },
+            "System.Diagnostics.PerformanceCounter": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "ZKWeb.System.Drawing": {
               "target": "Package",
               "version": "[4.0.1, )"
