@@ -4,7 +4,57 @@ using System.Text;
 
 namespace Druk.Common.Entity
 {
-    #region //JsonR_Simple
+    #region JsonR 接口返回的Json对象
+    [Serializable]
+    public class JsonResponse
+    {
+        public JsonResponse()
+        {
+            code = -1;
+            message = string.Empty;
+            body = null;
+        }
+        /// <summary>
+        /// 返回码
+        /// </summary>
+        public int code { get; set; }
+        /// <summary>
+        /// 返回说明
+        /// </summary>
+        public string message { get; set; }
+        /// <summary>
+        /// 返回数据体 可为空
+        /// </summary>
+        public object body { get; set; }
+    }
+    #endregion
+
+    #region JsonR 接口返回的Json对象
+    [Serializable]
+    public class JsonResponse<T>
+    {
+        public JsonResponse()
+        {
+            code = -1;
+            message = string.Empty;
+            body = default(T);
+        }
+        /// <summary>
+        /// 返回码
+        /// </summary>
+        public int code { get; set; }
+        /// <summary>
+        /// 返回说明
+        /// </summary>
+        public string message { get; set; }
+        /// <summary>
+        /// 返回数据体 可为空
+        /// </summary>
+        public T body { get; set; }
+    }
+    #endregion
+     
+    #region JsonR_Simple
     /// <summary>
     /// 页面数据传输过程中,用于存储外键对象名称
     /// </summary>
@@ -29,7 +79,7 @@ namespace Druk.Common.Entity
 
     #endregion
 
-    #region //JsonR_SimpleCode
+    #region JsonR_SimpleCode
     [Serializable]
     public class JsonR_SimpleCode : JsonR_Simple
     {
@@ -38,7 +88,7 @@ namespace Druk.Common.Entity
     }
     #endregion
 
-    #region //JsonR_KeyValue
+    #region JsonR_KeyValue
     /// <summary>
     /// 页面数据传输过程中,用于储存键值对
     /// </summary>

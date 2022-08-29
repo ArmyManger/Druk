@@ -42,8 +42,7 @@ namespace Druk.Common
         }
 
         #endregion
-
-
+         
         #region //对象类型
         /// <summary>
         /// 数据库对象类型, 主要用于修改和启用禁用时的日志存储和后期处理
@@ -83,7 +82,42 @@ namespace Druk.Common
             [Description("阿里OSS")]
             阿里OSS = 2
         }
+        #endregion
 
+
+        #region 项目状态码
+        /// <summary>
+        /// 项目状态码
+        /// </summary>
+        public enum Code
+        {
+            #region 普通操作
+            [Description("操作成功")]
+            操作成功 = 0,
+            [Description("操作失败")]
+            操作失败 = 1,
+            [Description("参数异常")]
+            参数异常 = 2,
+            [Description("未找到对象")]
+            未找到对象 = 3,
+            [Description("必填字段为空")]
+            必填字段为空 = 4,
+            [Description("输入Json与模型要求不一致")]
+            输入Json与模型要求不一致 = 5,
+            [Description("已有同名数据,请避免数据重复")]
+            已有同名参数 = 6,
+            [Description("条件判断未通过，刷新重试")]
+            条件判断未通过 = 7,
+            [Description("当前对象为失效或者禁用状态")]
+            当前对象失效 = 8,
+            [Description("请求成功")]
+            请求成功 = 9,
+            [Description("请求失败")]
+            请求失败 = 10,
+            [Description("程序异常")]
+            程序异常 = 500,
+            #endregion 
+        } 
         #endregion
     }
 }
