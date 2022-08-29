@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace Druk.DB
@@ -24,11 +25,11 @@ namespace Druk.DB
         public static string iv = "Tg#2qhm6QE69LspB";   //16位
         #endregion
 
-
+        #region 系统基础数据库
         /// <summary>
         /// 系统基础数据库
         /// </summary>
-        public static string Conn_Wathet
+        public static string Conn_Druk
         {
             get
             {
@@ -36,7 +37,6 @@ namespace Druk.DB
                 {
                     return GetSqlConn("SQL.Wathet");
                 }
-
                 try
                 {
                     //读配置文件中的数据库连接
@@ -51,9 +51,26 @@ namespace Druk.DB
                 }
             }
         }
+        #endregion
 
-
-        #region //工具 静态变量获取数据库连接字符串
+        #region 会员库
+        /// <summary>
+        /// 会员数据库链接字符串(只读)
+        /// </summary>
+        public static string Conn_Druk_Member
+        {
+            get { return GetSqlConn("SQL.Wathet_Member"); }
+        }
+        /// <summary>
+        /// 会员数据库 只读
+        /// </summary>
+        public static string Conn_Wathet_Member_Read
+        {
+            get { return GetRead(Conn_Druk_Member); }
+        }
+        #endregion
+         
+        #region 工具 静态变量获取数据库连接字符串
         /// <summary>
         /// 静态变量获取数据库连接字符串
         /// </summary>
@@ -68,7 +85,7 @@ namespace Druk.DB
             if (Setting_SqlConn == null || Setting_SqlConn.Count == 0)
             {
                 //读取配置表中的数据库配置信息 
-                var list = Conn_Wathet.GetList<Entity.Sys_Params>("PNAME,PVALUE", "PNAME LIKE 'SQL.%'");
+                var list = Conn_Druk.GetList<Entity.Sys_Params>("PNAME,PVALUE", "PNAME LIKE 'SQL.%'");
 
                 #region //解密数据库连接 
                 Setting_SqlConn = new Dictionary<string, string>();
@@ -86,7 +103,7 @@ namespace Druk.DB
         }
         #endregion
 
-        #region 检查只读
+        #region 只读工具
         /// <summary>
         /// 检查是否是只读连接并且标记为只读的， 休眠一秒
         /// </summary>
@@ -115,6 +132,26 @@ namespace Druk.DB
             catch (Exception)
             {
             }
+        }
+
+
+        /// <summary>
+        /// 只读
+        /// </summary>
+        /// <param name="connString"></param>
+        /// <returns></returns>
+        public static string GetRead(string connString)
+        {
+            var dic = new Dictionary<string, string>();
+            connString.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList().ForEach(o =>
+            {
+                var key = o.Contains("=") ? o.Substring(0, o.IndexOf('=')) : o;
+                var value = o.Contains("=") ? o.Substring(o.IndexOf('=') + 1) : "";
+                dic.Add(key.ToLower(), value);
+            });
+            dic["applicationintent"] = "ReadOnly";
+            var connStr = string.Join(";", dic.Select(p => p.Key + "=" + p.Value));
+            return connString;  //connStr
         }
         #endregion
     }
