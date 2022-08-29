@@ -26,10 +26,22 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Druk.API.CMS.Controllers.UserController.List">
+        <member name="M:Druk.API.CMS.Controllers.UserController.List(System.String,System.Int32,System.Int32)">
             <summary>
-            用户列表
+            获取用户列表
             </summary>
+            <param name="keyWord"></param>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Druk.API.CMS.Controllers.UserController.Detail(System.Int32)">
+            <summary>
+            获取用户详情
+            </summary>
+            <param name="keyWord"></param>
+            <param name="page"></param>
+            <param name="pageSize"></param>
             <returns></returns>
         </member>
         <member name="T:Druk.API.CMS.Startup">
@@ -41,6 +53,41 @@
             <summary>
             过滤器
             </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Util.BaseController.ErrorResult(Druk.Common.ComEnum.Code,System.String,System.Object)">
+            <summary>
+            返回失败
+            </summary>
+            <param name="code"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Druk.API.CMS.Util.BaseController.Error``1(Druk.Common.ComEnum.Code,System.String,``0)">
+            <summary>
+            返回失败
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="code"></param>
+            <param name="error"></param>
+            <param name="body"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Druk.API.CMS.Util.BaseController.SuccessResult(System.Object,Druk.Common.ComEnum.Code,System.String)">
+            <summary>
+            返回成功
+            </summary>
+            <param name="body"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Druk.API.CMS.Util.BaseController.Success``1(``0,Druk.Common.ComEnum.Code,System.String)">
+            <summary>
+            返回成功
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="body"></param>
+            <param name="code"></param>
+            <param name="message"></param>
+            <returns></returns>
         </member>
         <member name="T:Druk.API.CMS.Util.SwaggerSetUp">
             <summary>
