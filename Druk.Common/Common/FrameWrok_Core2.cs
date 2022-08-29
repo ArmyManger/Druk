@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace Druk.Common
     } 
     #endregion
 
-    #region //Path 获取项目的绝对路径 使用DoPath下的方法
+    #region Path 获取项目的绝对路径 使用DoPath下的方法
     public static class Extensions
     {
         public static IServiceCollection AddWkMvcDI(this IServiceCollection services)
@@ -92,5 +93,53 @@ namespace Druk.Common
     }
 
     #endregion
+
+    #region ConfigJson  读取项目配置文件 Config.json
+
+    public static class ConfigJson
+    {
+        public static ConfigJson_Temp AppSettings
+        {
+            get
+            {
+                return new ConfigJson_Temp();
+            }
+        }
+
+        public class ConfigJson_Temp
+        {
+            public string this[string name]
+            {
+                get
+                {
+                    try
+                    {
+                        var appVersion = Common.Config.appVersion;
+                        var configFile = string.Empty;
+                        switch (appVersion)
+                        {
+                            case "dev":
+                            case "uat":
+                            case "prod":
+                            default:
+                                configFile = $"Config.{appVersion}.json";
+                                break;
+                        }
+                        var configuration = new ConfigurationBuilder();
+                        configuration.AddJsonFile(configFile);
+                        return configuration.Build()[name];
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToSimple("Config文件读取失败，目标: " + name));
+                        return null;
+                    }
+                }
+            }
+        }
+    }
+
+    #endregion
+
 
 }

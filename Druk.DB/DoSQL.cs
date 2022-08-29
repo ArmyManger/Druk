@@ -15,6 +15,22 @@ namespace Druk.DB
     public static class DoSQL
     {
 
+        /// <summary>
+        /// 查询数据
+        /// </summary>
+        public static DataTable Scan(this SqlConnection conn, string tableName, string where = "", DbTransaction transaction = null)
+        {
+            if (!string.IsNullOrEmpty(where))
+            {
+                where = " WHERE " + where;
+            }
+
+            string sql = string.Format("SELECT * FROM {0}(nolock) {1}", tableName, where);
+            //最后提交
+            return conn.ExecuteDT(sql, CommandType.Text, null, transaction);
+        }
+
+
         #region ExecuteDT
 
         /// <summary>

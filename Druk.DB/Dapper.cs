@@ -212,6 +212,103 @@ namespace Druk.DB
 
         #endregion
 
+        #region 构建查询sql语句
+        /// <summary>
+        /// 获取记录总数SQL语句
+        /// </summary>
+        /// <param name="_safeSql">SQL查询语句</param>
+        /// <returns>记录总数SQL语句</returns>
+        private static string CreateCountingSql(string _safeSql)
+        {
+            return string.Format(" SELECT COUNT(1) AS RecordCount FROM ({0}) AS T ", _safeSql);
+        }
+        private static string CreatePagingSql(int _pageSize, int _pageIndex, string _safeSql, string _orderField)
+        {
+            //拼接SQL字符串，加上ROW_NUMBER函数进行分页
+            StringBuilder newSafeSql = new StringBuilder();
+            newSafeSql.AppendFormat("SELECT ROW_NUMBER() OVER(ORDER BY {0}) as row_number,", _orderField);
+            newSafeSql.Append(_safeSql.Substring(_safeSql.ToUpper().IndexOf("SELECT") + 6));
+
+            //拼接成最终的SQL语句
+            StringBuilder sbSql = new StringBuilder();
+            sbSql.Append("SELECT * FROM (");
+            sbSql.Append(newSafeSql.ToString());
+            sbSql.Append(") AS T");
+            sbSql.AppendFormat(" WHERE row_number between {0} and {1}", ((_pageIndex - 1) * _pageSize) + 1, _pageIndex * _pageSize);
+
+            return sbSql.ToString() + " order by  row_number asc";
+        }
+
+        /// <summary>
+        /// 获取分页SQL语句，默认row_number为关健字，所有表不允许使用该字段名
+        /// </summary>
+        /// <param name="_recordCount">记录总数</param>
+        /// <param name="_pageSize">每页记录数</param>
+        /// <param name="_pageIndex">当前页数</param>
+        /// <param name="_safeSql">SQL查询语句</param>
+        /// <param name="_orderField">排序字段，多个则用“,”隔开</param>
+        /// <returns>分页SQL语句</returns>
+        private static string CreatePagingSql(int _recordCount, int _pageSize, int _pageIndex, string _safeSql, string _orderField)
+        {
+            //计算总页数
+            _pageSize = _pageSize == 0 ? _recordCount : _pageSize;
+            int pageCount = (_recordCount + _pageSize - 1) / _pageSize;
+
+            //检查当前页数
+            if (_pageIndex < 1)
+            {
+                _pageIndex = 1;
+            }
+            else if (_pageIndex > pageCount)
+            {
+                _pageIndex = pageCount;
+            }
+            //拼接SQL字符串，加上ROW_NUMBER函数进行分页
+            StringBuilder newSafeSql = new StringBuilder();
+            newSafeSql.AppendFormat("SELECT ROW_NUMBER() OVER(ORDER BY {0}) as row_number,", _orderField);
+            newSafeSql.Append(_safeSql.Substring(_safeSql.ToUpper().IndexOf("SELECT") + 6));
+
+            //拼接成最终的SQL语句
+            StringBuilder sbSql = new StringBuilder();
+            sbSql.Append("SELECT * FROM (");
+            sbSql.Append(newSafeSql.ToString());
+            sbSql.Append(") AS T");
+            sbSql.AppendFormat(" WHERE row_number between {0} and {1}", ((_pageIndex - 1) * _pageSize) + 1, _pageIndex * _pageSize);
+
+            return sbSql.ToString() + " order by  row_number asc";
+        }
+
+        #endregion
+
+        #region 构建更新sql语句
+        /// <summary>
+        /// 获取更新sql
+        /// </summary>
+        /// <param name="type">需要更新的类型</param>
+        /// <param name="primaryKey">需要更新的主键名</param>
+        /// <returns></returns>
+        public static string GetUpdateParamSql(Type type, string primaryKey, string asName = "")
+        {
+            var tableName = GetTableName(type);
+            if (!string.IsNullOrEmpty(asName))
+                tableName = asName;
+            var properties = type.GetProperties();
+            var fields = type.GetFields();
+            var paramSql = $"update {tableName} set ";
+            primaryKey = (primaryKey ?? "").ToLower();
+            if (properties != null && properties.Length > 0)
+            {
+                for (int i = 0; i < properties.Length; i++)
+                {
+                    var name = properties[i].Name;
+                    if (primaryKey != (name.ToLower()))
+                        paramSql += "[" + name + "]=@" + name + ",";
+                }
+            }
+            return paramSql.TrimEnd(',') + string.Format(" where {0}=@{0}", primaryKey);
+        }
+        #endregion
+
         #region 工具
         /// <summary>
         /// 获取表名
@@ -486,6 +583,482 @@ namespace Druk.DB
 
         #endregion
 
+        #region select list
+
+        /// <summary>
+        /// 异步获取分页结果
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conStr"></param>
+        /// <param name="sql"></param>
+        /// <param name="orderby"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="param"></param>
+        /// <param name="countSql"></param>
+        /// <param name="commandType"></param>
+        /// <returns></returns>
+        public static async Task<PagedResult<T>> GetListPagedAsync<T>(this string conStr, string sql, string orderby, int pagesize, int pageindex, object param = null, string countSql = null, CommandType commandType = CommandType.Text)
+        {
+            Config.CheckIsOnlyReadDB(conStr);
+            var pagingSql = string.Empty;
+            var whereParam = param.CheckWhereParam();
+            try
+            {
+                var safeSql = GetAntiXssSql(sql);
+                countSql ??= CreateCountingSql(safeSql);
+                pagingSql = CreatePagingSql(pagesize, pageindex, safeSql, orderby);
+                using SqlConnection con = new SqlConnection(conStr);
+                var reader = await con.QueryMultipleAsync($"{countSql};{pagingSql}", whereParam);
+                var totalCount = await reader.ReadSingleOrDefaultAsync<int>();
+                var items = await reader.ReadAsync<T>();
+                return items.ToPagedResult(totalCount, pageindex, pagesize);
+            }
+            catch (Exception ex)
+            {
+                //记录异常日志
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = pagingSql,
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// 查询分页数据列表
+        /// </summary>
+        /// <typeparam name="T">查询对象</typeparam>
+        /// <param name="con">数据库链接</param>
+        /// <param name="fieldParam">查询字段,查询全部为null,查询某个字段，如：new {name="",id=0,status=0}</param>
+        /// <param name="whereField">查询条件, sql语句,不包含where</param>
+        /// <param name="whereParam">查询条件参数值，如：new {name="danny",status=1}</param>
+        /// <param name="orderBy">排序字段 ,正序为true，降序为false，如：new {sort_id=false,id=true}</param>
+        /// <param name="pagesize">每页条数</param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="totalCount">返回总条数</param>
+        /// <returns></returns>
+        public static List<T> GetListPaged<T>(this string conStr, object fieldParam, string whereField, object whereParam, object orderBy, int pagesize, int pageindex, out int totalCount)
+        {
+            Config.CheckIsOnlyReadDB(conStr);
+            var safeSql = string.Empty;
+            var pagingSql = string.Empty;
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append(CreateQueryTSql(GetTableName(typeof(T)), fieldParam));
+
+                #region 查询条件
+                if (!string.IsNullOrEmpty(whereField.Trim()))
+                    sql.Append($" where {whereField.ToString()}");
+                #endregion
+
+                var order = CreateOrderByTsql(orderBy, true);
+
+                safeSql = GetAntiXssSql(sql.ToString());
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    totalCount = con.Query<int>(CreateCountingSql(safeSql), whereParam.CheckWhereParam()).First();
+                    pagingSql = CreatePagingSql(totalCount, pagesize, pageindex, safeSql, order);
+                    return con.Query<T>(pagingSql, whereParam.CheckWhereParam()).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = pagingSql,
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                totalCount = 0;
+                return default(List<T>);// new List<T>();
+            }
+        }
+
+
+
+        /// <summary>
+        /// 查询数据列表
+        /// </summary>
+        /// <typeparam name="T">查询对象</typeparam>
+        /// <param name="conStr">数据库链接</param>
+        /// <param name="fieldParam">查询字段,查询全部为null,查询某个字段，如：new {name="",id=0,status=0}</param>
+        /// <param name="whereParam">查询条件，如：new {name="danny",status=1}</param>
+        /// <param name="orderBy">排序字段 ,正序为true，降序为false，如：new {sort_id=false,id=true}</param>
+        /// <returns></returns>
+        public static List<T> GetList<T>(this string conStr, object fieldParam, object whereParam = null, object orderBy = null)
+        {
+            Config.CheckIsOnlyReadDB(conStr);
+            var safeSql = string.Empty;
+            try
+            {
+                safeSql = GetAntiXssSql(CreateQueryTSql(GetTableName(typeof(T)), fieldParam, whereParam, orderBy));
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    return con.Query<T>(safeSql, whereParam.CheckWhereParam()).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = safeSql,
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return null;
+            }
+
+        }
+
+        /// <summary>
+        /// 查询数据列表
+        /// </summary>
+        /// <typeparam name="T">查询对象</typeparam>
+        /// <param name="con">数据库链接</param>
+        /// <param name="fieldParam">查询字段,查询全部为null,查询某个字段，如：new {name="",id=0,status=0}</param>
+        /// <param name="whereParam">查询条件，如：new {name="danny",status=1}</param>
+        /// <param name="orderBy">排序字段 ,正序为true，降序为false，如：new {sort_id=false,id=true}</param>
+        /// <returns></returns>
+        public static async Task<List<T>> GetListAsync<T>(this string conStr, object fieldParam, object whereParam = null, object orderBy = null)
+        {
+            Config.CheckIsOnlyReadDB(conStr);
+            var safeSql = string.Empty;
+            try
+            {
+                safeSql = GetAntiXssSql(CreateQueryTSql(GetTableName(typeof(T)), fieldParam, whereParam, orderBy));
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    var result = await con.QueryAsync<T>(safeSql, whereParam.CheckWhereParam());
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = safeSql,
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return null;
+            }
+
+        }
+
+
+
+        /// <summary>
+        ///获取数据列表
+        /// </summary>
+        /// <typeparam name="T">获取的列表类型</typeparam>
+        /// <param name="conStr"></param>
+        /// <param name="con">直接调用DapperConnection类</param>
+        /// <param name="sql">sql语句含orderby</param>
+        /// <param name="param">参数</param>
+        /// <param name="isFilter"></param>
+        /// <param name="commandType"></param>
+        /// <returns></returns>
+        public static List<T> GetListBySql<T>(this string conStr, string sql, object param = null, bool isFilter = true, CommandType commandType = CommandType.Text)
+        {
+            Config.CheckIsOnlyReadDB(conStr);
+            var safeSql = sql;
+            try
+            {
+                if (isFilter)
+                    safeSql = GetAntiXssSql(sql);
+
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    return con.Query<T>(safeSql, param.CheckWhereParam(), commandType: commandType).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = safeSql,
+                    IsTrans = false,
+                    Params = param,
+                    Error = ex
+                });
+                return null;  //不要返回new list
+            }
+        }
+
+        /// <summary>
+        ///获取数据列表
+        /// </summary>
+        /// <typeparam name="T">获取的列表类型</typeparam>
+        /// <param name="conStr"></param>
+        /// <param name="con">直接调用DapperConnection类</param>
+        /// <param name="sql">sql语句含orderby</param>
+        /// <param name="param">参数</param>
+        /// <param name="isFilter"></param>
+        /// <param name="commandType"></param>
+        /// <returns></returns>
+        public static async Task<List<T>> GetListBySqlAsync<T>(this string conStr, string sql, object param = null, bool isFilter = true, CommandType commandType = CommandType.Text)
+        {
+            Config.CheckIsOnlyReadDB(conStr);
+            var safeSql = sql;
+            try
+            {
+                if (isFilter)
+                    safeSql = GetAntiXssSql(sql);
+
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    return (await con.QueryAsync<T>(safeSql, param.CheckWhereParam(), commandType: commandType)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = safeSql,
+                    IsTrans = false,
+                    Params = param,
+                    Error = ex
+                });
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Dapper获取分页列表
+        /// </summary>
+        /// <typeparam name="T">获取的列表类型</typeparam>
+        /// <param name="conStr"></param>
+        /// <param name="sql">sql语句（不包含orderby以外的部分）</param>
+        /// <param name="orderby">orderby的字段，如果多个可用,分隔，逆序可用desc</param>
+        /// <param name="pagesize">页大小</param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="totalCount">数据总数</param>
+        /// <param name="param"></param>
+        /// <param name="sqlCount"></param>
+        /// <param name="commandType"></param>
+        /// <returns></returns>
+        public static List<T> GetListBySql<T>(this string conStr, string sql, string orderby, int pagesize, int pageindex, out int totalCount, object param = null, string sqlCount = null,
+            CommandType commandType = CommandType.Text)
+        {
+            Config.CheckIsOnlyReadDB(conStr);
+            var safeSql = string.Empty;
+            try
+            {
+                safeSql = GetAntiXssSql(sql);
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    if (sqlCount == null)
+                    {
+                        var tmpStr = CreateCountingSql(safeSql);
+                        totalCount = con.Query<int>(tmpStr, param.CheckWhereParam()).First();
+                    }
+                    else
+                        totalCount = con.Query<int>(sqlCount, param.CheckWhereParam()).First();
+                    var pagingSql = CreatePagingSql(totalCount, pagesize, pageindex, safeSql, orderby);
+                    return con.Query<T>(pagingSql, param.CheckWhereParam(), commandType: commandType).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                totalCount = 0;
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = safeSql,
+                    IsTrans = false,
+                    Params = param,
+                    Error = ex
+                });
+                return null;
+            }
+        }
+
+
+        #endregion
+
+        #region select count
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="whereParam">sql里面用的参数，假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+        /// <returns></returns>
+        public static int GetCount<T>(this string conStr, object whereParam) where T : class, new()
+        {
+            StringBuilder sql = new StringBuilder();
+            try
+            {
+                var properties = typeof(T).GetProperties();
+                sql.Append($"select count(*) from {GetTableName(typeof(T))}");
+                if (whereParam != null)
+                {
+                    if (whereParam is string)
+                    {
+                        sql.Append($" where { WhereFilterSql(whereParam.ToString())}");
+                    }
+                    else
+                    {
+                        sql.Append(" where ");
+                        var whereField = whereParam.GetType().GetProperties();
+                        for (int i = 0; i < whereField.Length; i++)
+                        {
+                            if (i > 0)
+                                sql.Append(" and  ");
+                            sql.Append($" {whereField[i].Name}=@{whereField[i].Name}");
+                        }
+                    }
+                }
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int count = con.Query<int>(sql.ToString(), whereParam.CheckWhereParam()).FirstOrDefault();
+                    return count;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql.ToString(),
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="whereParam">sql里面用的参数，假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+        /// <returns></returns>
+        public static async Task<int> GetCountAsync<T>(this string conStr, object whereParam) where T : class, new()
+        {
+            StringBuilder sql = new StringBuilder();
+            try
+            {
+                var properties = typeof(T).GetProperties();
+                sql.Append($"select count(*) from {GetTableName(typeof(T))}");
+                if (whereParam != null)
+                {
+                    if (whereParam is string)
+                    {
+                        sql.Append($" where { WhereFilterSql(whereParam.ToString())}");
+                    }
+                    else
+                    {
+                        sql.Append(" where ");
+                        var whereField = whereParam.GetType().GetProperties();
+                        for (int i = 0; i < whereField.Length; i++)
+                        {
+                            if (i > 0)
+                                sql.Append(" and  ");
+                            sql.Append($" {whereField[i].Name}=@{whereField[i].Name}");
+                        }
+                    }
+                }
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    var count = await con.QueryAsync<int>(sql.ToString(), whereParam.CheckWhereParam());
+                    return count.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql.ToString(),
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return 0;
+            }
+        }
+
+
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="sql"></param>
+        /// <param name="whereParam">sql里面用的参数，假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+
+        /// <returns></returns>
+        public static int GetCount(this string conStr, string sql, object whereParam = null)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int count = con.Query<int>(sql.ToString(), whereParam).FirstOrDefault();
+                    return count;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql.ToString(),
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="sql"></param>
+        /// <param name="whereParam">sql里面用的参数，假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+        /// <returns></returns>
+        public static async Task<int> GetCountAsync(this string conStr, string sql, object whereParam = null)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    var count = await con.QueryAsync<int>(GetAntiXssSql(sql), whereParam);
+                    return count.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql.ToString(),
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return 0;
+            }
+        }
+        #endregion
+
         #region insert 
         /// <summary>
         /// insert 一个实体，返回一个实体（实体包含插入成功的自增id）
@@ -527,7 +1100,7 @@ namespace Druk.DB
                 return default(T); ;
             }
         }
-         
+
         /// <summary>
         /// insert 一个实体，返回一个实体（实体包含插入成功的自增id）
         /// </summary>
@@ -569,7 +1142,7 @@ namespace Druk.DB
                 return default(T); ;
             }
         }
-         
+
         /// <summary>
         /// insert 一个实体，返回受影响行数
         /// </summary>
@@ -860,6 +1433,705 @@ namespace Druk.DB
 
             }
 
+        }
+        #endregion
+
+        #region update
+        /// <summary>
+        /// update一个实体,实体是先查询出来的
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="con">直接调用DapperConnection类</param>
+        /// <param name="model">需要更新的Entity对象</param>
+        /// <param name="primaryKey">不需要更新的字段，主要是针对自增主键</param>
+        /// <param name="isFilter"></param>
+        /// <param name="asName"></param>
+        /// <returns></returns>
+        public static bool UpdateModel<T>(this string conStr, T model, string primaryKey = "id", bool isFilter = true, string asName = "") where T : class
+        {
+            var updateParameterSql = GetUpdateParamSql(typeof(T), primaryKey, asName);
+            try
+            {
+                if (isFilter)
+                    model = ReturnSecurityObject(model) as T;
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    return con.Execute(updateParameterSql, model) > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = updateParameterSql,
+                    IsTrans = false,
+                    Params = null,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// update一个实体,实体是先查询出来的
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="con">直接调用DapperConnection类</param>
+        /// <param name="model">需要更新的Entity对象</param>
+        /// <param name="primaryKey">不需要更新的字段，主要是针对自增主键</param>
+        /// <param name="isFilter"></param>
+        /// <param name="asName"></param>
+        /// <returns></returns>
+        public static async Task<bool> UpdateModelAsync<T>(this string conStr, T model, string primaryKey = "id", bool isFilter = true, string asName = "") where T : class
+        {
+            var updateParameterSql = GetUpdateParamSql(typeof(T), primaryKey, asName);
+            try
+            {
+                if (isFilter)
+                    model = ReturnSecurityObject(model) as T;
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    return (await con.ExecuteAsync(updateParameterSql, model)) > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = updateParameterSql,
+                    IsTrans = false,
+                    Params = null,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+
+
+        /// <summary>
+        /// 修改一个实体，返回一个实体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conStr"></param>
+        /// <param name="model"></param>
+        /// <param name="primaryKey"></param>
+        /// <param name="isFilter"></param>
+        /// <param name="asName"></param>
+        /// <returns></returns>
+        public static T UpdateModelEntity<T>(this string conStr, T model, string primaryKey = "id", bool isFilter = true, string asName = "") where T : class
+        {
+            var updateParameterSql = string.Empty;
+            try
+            {
+                updateParameterSql = GetUpdateParamSql(typeof(T), primaryKey, asName);
+                if (isFilter)
+                    model = ReturnSecurityObject(model) as T;
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    var identify = con.Query<int>(updateParameterSql, model).FirstOrDefault();
+                    if (!string.IsNullOrWhiteSpace(primaryKey))
+                        model = SetIdentify(model, primaryKey, identify);
+                    return model;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = updateParameterSql,
+                    IsTrans = false,
+                    Params = null,
+                    Error = ex
+                });
+                return default(T); ;
+            }
+        }
+
+        /// <summary>
+        /// 批量更新多个model对象，注：如数据量千条以上，建议使用数据库的自定义表类型来批量更新
+        /// </summary>
+        /// <typeparam name="T">更新对象的类型</typeparam>
+        /// <param name="conStr">链接字符串</param>
+        /// <param name="listModel">更新的list</param>
+        /// <param name="primaryKey">主键id</param>
+        /// <param name="isFilter"></param>
+        /// <returns></returns>
+        public static int UpdateBatchModelRowCount<T>(this string conStr, List<T> listModel, string primaryKey = "id", bool isFilter = true, string asName = "")
+        where T : class, new()
+        {
+            var sql = string.Empty;
+            try
+            {
+                sql = GetUpdateParamSql(typeof(T), primaryKey, asName);
+                if (isFilter)
+                    listModel = ReturnSecurityObject(listModel) as List<T>;
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    var identify = con.Execute(sql, listModel);
+                    return identify;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = null,
+                    Error = ex
+                });
+                return 0;
+            }
+        }
+
+
+        /// <summary>
+        /// 批量更新多个model对象，注：如数据量千条以上，建议使用数据库的自定义表类型来批量更新
+        /// </summary>
+        /// <typeparam name="T">更新对象的类型</typeparam>
+        /// <param name="conStr">链接字符串</param>
+        /// <param name="listModel">更新的list</param>
+        /// <param name="primaryKey">主键id</param>
+        /// <param name="isFilter"></param>
+        /// <returns></returns>
+        public static async Task<int> UpdateBatchModelRowCountAsync<T>(this string conStr, List<T> listModel, string primaryKey = "id", bool isFilter = true, string asName = "")
+        where T : class, new()
+        {
+            var sql = string.Empty;
+            try
+            {
+                sql = GetUpdateParamSql(typeof(T), primaryKey, asName);
+                if (isFilter)
+                    listModel = ReturnSecurityObject(listModel) as List<T>;
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    var identify = await con.ExecuteAsync(sql, listModel);
+                    return identify;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = null,
+                    Error = ex
+                });
+                return 0;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 更新对象
+        /// </summary>
+        /// <typeparam name="T">对象</typeparam>
+        /// <param name="conStr"></param>
+        /// <param name="updateParam">set字段</param>
+        /// <param name="whereParam">where字段</param>
+        /// <param name="isFilter"></param>
+        /// <returns></returns>
+        public static bool UpdateModel<T>(this string conStr, object updateParam, object whereParam, bool isFilter = true) where T : class, new()
+        {
+            T model = new T();
+            StringBuilder sql = new StringBuilder();
+            var t = typeof(T);
+            var properties = t.GetProperties();
+            sql.Append($"update {GetTableName(typeof(T))} set ");
+
+            #region 更新字段
+            if (updateParam != null)
+            {
+                if (updateParam is string)
+                {
+                    sql.Append(updateParam.ToString());
+                }
+                else
+                {
+                    var fieldObj = updateParam.GetType().GetProperties();
+                    int i = 0;
+                    foreach (var pi in fieldObj)
+                    {
+                        if (i > 0)
+                            sql.Append(",");
+                        sql.Append($" {pi.Name}=@{pi.Name} ");
+                        #region 处理参数
+                        var info = properties.Where(x => x.Name.ToLower() == pi.Name.ToLower()).FirstOrDefault();
+                        if (info != null)
+                        {
+                            if (info.PropertyType == "".GetType() && isFilter)//如果属性为string类型
+                            {
+                                var inputString = (pi.GetValue(updateParam) ?? "").ToString();
+                                info.SetValue(model, GetAntiXssSql(inputString));//将过滤后的值设置给传入的对象
+                            }
+                            else
+                            {
+                                info.SetValue(model, pi.GetValue(updateParam));
+                            }
+                        }
+                        #endregion
+                        i++;
+                    }
+                }
+            }
+            #endregion
+
+            #region where条件
+            if (whereParam != null)
+            {
+                sql.Append($" where ");
+                if (whereParam is string)
+                {
+                    sql.Append($"   {whereParam}");
+                }
+                else
+                {
+                    var whereField = whereParam.GetType().GetProperties();
+                    int i = 0;
+                    foreach (var pi in whereField)
+                    {
+                        if (i > 0)
+                            sql.Append(" and ");
+                        sql.Append($" {pi.Name}=@{pi.Name} ");
+
+                        var info = properties.Where(x => x.Name.ToLower() == pi.Name.ToLower()).FirstOrDefault();
+                        if (info != null)
+                        {
+                            if (info.PropertyType == "".GetType() && isFilter)//如果属性为string类型
+                            {
+                                var inputString = (pi.GetValue(whereParam) ?? "").ToString();
+                                info.SetValue(model, GetAntiXssSql(inputString));//将过滤后的值设置给传入的对象
+                            }
+                            else
+                            {
+                                info.SetValue(model, pi.GetValue(whereParam));
+                            }
+                        }
+                        i++;
+                    }
+                }
+            }
+
+            #endregion
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = con.Execute(sql.ToString(), model);
+                    return num > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql.ToString(),
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 更新对象
+        /// </summary>
+        /// <typeparam name="T">对象</typeparam>
+        /// <param name="conStr"></param>
+        /// <param name="updateParam">set字段</param>
+        /// <param name="whereParam">where字段</param>
+        /// <param name="isFilter"></param>
+        public static async Task<bool> UpdateModelAsync<T>(this string conStr, object updateParam, object whereParam, bool isFilter = true) where T : class, new()
+        {
+            T model = new T();
+            StringBuilder sql = new StringBuilder();
+            var t = typeof(T);
+            var properties = t.GetProperties();
+            sql.Append($"update {GetTableName(typeof(T))} set ");
+
+            #region 更新字段
+            if (updateParam != null)
+            {
+                if (updateParam is string)
+                {
+                    sql.Append(updateParam.ToString());
+                }
+                else
+                {
+                    var fieldObj = updateParam.GetType().GetProperties();
+                    int i = 0;
+                    foreach (var pi in fieldObj)
+                    {
+                        if (i > 0)
+                            sql.Append(",");
+                        sql.Append($" {pi.Name}=@{pi.Name} ");
+                        #region 处理参数
+                        var info = properties.Where(x => x.Name.ToLower() == pi.Name.ToLower()).FirstOrDefault();
+                        if (info != null)
+                        {
+                            if (info.PropertyType == "".GetType() && isFilter)//如果属性为string类型
+                            {
+                                var inputString = (pi.GetValue(updateParam) ?? "").ToString();
+                                info.SetValue(model, GetAntiXssSql(inputString));//将过滤后的值设置给传入的对象
+                            }
+                            else
+                            {
+                                info.SetValue(model, pi.GetValue(updateParam));
+                            }
+                        }
+                        #endregion
+                        i++;
+                    }
+                }
+            }
+            #endregion
+
+            #region where条件
+            if (whereParam != null)
+            {
+                sql.Append($" where ");
+                if (whereParam is string)
+                {
+                    sql.Append($"   {whereParam}");
+                }
+                else
+                {
+                    var whereField = whereParam.GetType().GetProperties();
+                    int i = 0;
+                    foreach (var pi in whereField)
+                    {
+                        if (i > 0)
+                            sql.Append(" and ");
+                        sql.Append($" {pi.Name}=@{pi.Name} ");
+
+                        var info = properties.Where(x => x.Name.ToLower() == pi.Name.ToLower()).FirstOrDefault();
+                        if (info != null)
+                        {
+                            if (info.PropertyType == "".GetType() && isFilter)//如果属性为string类型
+                            {
+                                var inputString = (pi.GetValue(whereParam) ?? "").ToString();
+                                info.SetValue(model, GetAntiXssSql(inputString));//将过滤后的值设置给传入的对象
+                            }
+                            else
+                            {
+                                info.SetValue(model, pi.GetValue(whereParam));
+                            }
+                        }
+                        i++;
+                    }
+                }
+            }
+
+            #endregion
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = await con.ExecuteAsync(sql.ToString(), model);
+                    return num > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql.ToString(),
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+        #endregion
+
+        #region delete 
+        /// <summary>
+        /// 删除对象
+        /// </summary>
+        /// <typeparam name="T">要删除的对象</typeparam>
+        /// <param name="con"></param>
+        /// <param name="whereParam"> 参数， 假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+        /// <returns></returns>
+        public static bool DeleteModel<T>(this string conStr, object whereParam)
+        {
+            var sql = $"delete {GetTableName(typeof(T))}  {CreateWhereTsql(whereParam)} ";
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = con.Execute(sql, whereParam);
+                    return num > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除对象
+        /// </summary>
+        /// <typeparam name="T">要删除的对象</typeparam>
+        /// <param name="con"></param>
+        /// <param name="whereParam"> 参数， 假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+        /// <returns></returns>
+        public static async Task<bool> DeleteModelAsync<T>(this string conStr, object whereParam)
+        {
+            var sql = $"delete {GetTableName(typeof(T))}  {CreateWhereTsql(whereParam)} ";
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = await con.ExecuteAsync(sql, whereParam);
+                    return num > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = whereParam,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除对象
+        /// </summary>
+        /// <typeparam name="T">要删除的对象</typeparam>
+        /// <param name="conStr"></param>
+        /// <param name="id"> 要删除的id</param>
+        /// <returns></returns>
+        public static bool DeleteModel<T>(this string conStr, int id)
+        {
+
+            var sql = $"delete {GetTableName(typeof(T))}  where id={id} ";
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = con.Execute(sql, null);
+                    return num > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = id,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+
+
+        /// <summary>
+        /// 删除对象
+        /// </summary>
+        /// <typeparam name="T">要删除的对象</typeparam>
+        /// <param name="conStr"></param>
+        /// <param name="id"> 要删除的id</param>
+        /// <returns></returns>
+        public static async Task<bool> DeleteModelAsync<T>(this string conStr, int id)
+        {
+
+            var sql = $"delete {GetTableName(typeof(T))}  where id={id} ";
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = await con.ExecuteAsync(sql, null);
+                    return num > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = id,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+        #endregion
+
+        #region 执行一条sql语句(增删改)
+        /// <summary>
+        /// 执行一条sql语句(增删改)
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="con">直接调用DapperConnection类</param>
+        /// <param name="sql">TSQL语句</param>
+        /// <param name="param">sql里面用的参数，假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+        /// <param name="saveLog"></param>
+        /// <param name="commandType"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public static bool ExecuteSql(this string conStr, string sql, object param = null, bool saveLog = true, CommandType commandType = CommandType.Text)
+        {
+            string filterSql = string.Empty;
+            try
+            {
+                filterSql = GetAntiXssSql(sql);
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = con.Execute(filterSql, param.CheckWhereParam(), commandType: commandType);
+
+                    return num > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = param,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 执行一条sql语句(增删改)
+        /// </summary>
+        /// <param name="conStr"></param>
+        /// <param name="con">直接调用DapperConnection类</param>
+        /// <param name="sql">TSQL语句</param>
+        /// <param name="param">sql里面用的参数，假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+        /// <param name="saveLog"></param>
+        /// <param name="commandType"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public static async ValueTask<bool> ExecuteSqlAsync(this string conStr, string sql, object param = null, bool saveLog = true, CommandType commandType = CommandType.Text)
+        {
+            string filterSql = string.Empty;
+            try
+            {
+                filterSql = GetAntiXssSql(sql);
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = await con.ExecuteAsync(filterSql, param.CheckWhereParam(), commandType: commandType);
+                    return num > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = param,
+                    Error = ex
+                });
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 执行一条sql语句(增删改),返回受影响的行数
+        /// </summary>
+        /// <param name="conStr">直接调用DapperConnection类</param>
+        /// <param name="sql">TSQL语句</param>
+        /// <param name="param">sql里面用的参数，假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+        /// <param name="saveLog"></param>
+        /// <param name="commandType"></param>
+        /// <returns></returns>
+        public static int ExecuteSqlReturnRowCount(this string conStr, string sql, object param = null, bool saveLog = true, CommandType commandType = CommandType.Text)
+        {
+            string filterSql = string.Empty;
+            try
+            {
+                filterSql = GetAntiXssSql(sql);
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = con.Execute(filterSql, param.CheckWhereParam(), commandType: commandType);
+                    return num;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = param,
+                    Error = ex
+                });
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// 执行一条sql语句(增删改),返回受影响的行数
+        /// </summary>
+        /// <param name="conStr">直接调用DapperConnection类</param>
+        /// <param name="sql">TSQL语句</param>
+        /// <param name="param">sql里面用的参数，假设用到@a，则传入new {a='xxx'},传入对象即可</param>
+        /// <param name="saveLog"></param>
+        /// <param name="commandType"></param>
+        /// <returns></returns>
+        public static async ValueTask<int> ExecuteSqlReturnRowCountAsync(this string conStr, string sql, object param = null, bool saveLog = true, CommandType commandType = CommandType.Text)
+        {
+            string filterSql = string.Empty;
+            try
+            {
+                filterSql = GetAntiXssSql(sql);
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    int num = await con.ExecuteAsync(filterSql, param.CheckWhereParam(), commandType: commandType);
+                    return num;
+                }
+            }
+            catch (Exception ex)
+            {
+                DBError_Log.SQL_Error(new Entity.DBError()
+                {
+                    Conn = null,
+                    Sql = sql,
+                    IsTrans = false,
+                    Params = param,
+                    Error = ex
+                });
+                return 0;
+            }
         }
         #endregion
     }
