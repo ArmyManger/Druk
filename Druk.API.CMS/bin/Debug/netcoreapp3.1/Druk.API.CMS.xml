@@ -125,9 +125,50 @@
             <param name="message"></param>
             <returns></returns>
         </member>
+        <member name="T:Druk.API.CMS.Util.SwaggerOperation">
+            <summary>
+            swagger
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Util.SwaggerOperation.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            添加参数
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Druk.API.CMS.Util.HiddenApiAttribute">
+            <summary> 
+            隐藏接口，不生成到swagger文档展示 
+            </summary> 
+        </member>
+        <member name="M:Druk.API.CMS.Util.HiddenApiAttribute.#ctor(System.Int32)">
+            <summary>
+            需要在哪个运行模式隐藏
+            0：忽略模式，始终隐藏
+            </summary>
+            <param name="_runMode"></param>
+        </member>
+        <member name="P:Druk.API.CMS.Util.HiddenApiAttribute.runMode">
+            <summary>
+            运行模式
+            </summary>
+        </member>
+        <member name="T:Druk.API.CMS.Util.HiddenApiFilter">
+            <summary>
+            隐藏api过滤器
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Util.HiddenApiFilter.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            隐藏api过滤器
+            </summary>
+            <param name="swaggerDoc"></param>
+            <param name="context"></param>
+        </member>
         <member name="T:Druk.API.CMS.Util.SwaggerSetUp">
             <summary>
-            swagger启动类
+            swagger启动
             </summary>
         </member>
         <member name="M:Druk.API.CMS.Util.SwaggerSetUp.AddSwaggerSetup(Microsoft.Extensions.DependencyInjection.IServiceCollection)">

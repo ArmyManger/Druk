@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Druk.API.CMS.Util
 {
     /// <summary>
-    /// swagger启动类
+    /// swagger启动
     /// </summary>
     public static class SwaggerSetUp
     {
@@ -39,6 +39,9 @@ namespace Druk.API.CMS.Util
                 c.IncludeXmlComments(xmlPath, true);
                 var xmlPathModel = Path.Combine(AppContext.BaseDirectory, "Druk.API.CMS.Model.xml");
                 c.IncludeXmlComments(xmlPathModel, true);
+                //添加httpHeader参数
+                c.OperationFilter<Util.SwaggerOperation>();
+                c.DocumentFilter<Util.HiddenApiFilter>();
             });
         }
     }

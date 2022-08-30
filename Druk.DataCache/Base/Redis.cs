@@ -166,8 +166,7 @@ namespace Druk.DataCache.Base
         }
 
         #endregion
-
-
+         
         #region //执行Redis命令并返回结果
 
         /// <summary>
@@ -215,9 +214,6 @@ namespace Druk.DataCache.Base
             }
             return new List<string>();
         }
-        #endregion
-
-
-
+        #endregion 
     }
 }

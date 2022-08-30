@@ -1,6 +1,7 @@
 using Druk.API.CMS.Util;
 using Druk.Common;
 using Druk.Common.Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -65,12 +66,12 @@ namespace Druk.API.CMS
             #endregion
 
             #region //中间件 指定权限验证的方式 
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => { });
-            //services.AddControllersWithViews(option =>
-            //{
-            //    option.Filters.Add(typeof(Util.AuthorizeFilter)); //并添加自定义过滤器
-            //    option.RespectBrowserAcceptHeader = true;
-            //});
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => { });
+            services.AddControllersWithViews(option =>
+            {
+                option.Filters.Add(typeof(Util.AuthorizeFilter)); //并添加自定义过滤器
+                option.RespectBrowserAcceptHeader = true;
+            });
             #endregion
 
             #region //IIS反向代理设置
