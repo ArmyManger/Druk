@@ -10,7 +10,7 @@ namespace Druk.DB.Entity
     /// Sys_Params=系统参数配置表 实体定义类
     /// </summary>
     [Serializable, XmlRoot(ElementName = "SysParams")]
-    [Table("t_Sys_Params")]
+    [Table("Sys_Params")]
     public class Sys_Params : BaseEntity
     { 
         /// <summary>

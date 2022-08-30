@@ -84,7 +84,6 @@ D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\staticwebasse
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\staticwebassets\Druk.API.CMS.StaticWebAssets.xml
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\scopedcss\bundle\Druk.API.CMS.styles.css
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.RazorTargetAssemblyInfo.cache
-D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.csproj.CopyComplete
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.pdb
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.genruntimeconfig.cache
@@ -157,3 +156,4 @@ D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.AccessControl.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\System.Windows.Extensions.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Config.json
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.csproj.CopyComplete

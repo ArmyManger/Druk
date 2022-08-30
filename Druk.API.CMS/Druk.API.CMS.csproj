@@ -19,8 +19,4 @@
     <ProjectReference Include="..\Druk.DataCache\Druk.DataCache.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Operation\" />
-  </ItemGroup>
-
 </Project>

@@ -1,6 +1,5 @@
 ﻿using Druk.API.CMS.Model;
 using Druk.API.CMS.Util;
-using Druk.Common;
 using Druk.Common.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +35,7 @@ namespace Druk.API.CMS.Controllers
         [HttpGet]
         public JsonResponse List(string keyWord = "", int page = 1, int pageSize = Common.Config.DefaultPageSize)
         {
+          
             return SuccessResult();
         }
 

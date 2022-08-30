@@ -66,7 +66,7 @@ namespace Druk.Common
             using var scope = Service.CreateScope();
             return scope.ServiceProvider.GetService<TService>();
         }
-    } 
+    }
     #endregion
 
     #region Path 获取项目的绝对路径 使用DoPath下的方法
@@ -115,16 +115,17 @@ namespace Druk.Common
                     try
                     {
                         var appVersion = Common.Config.appVersion;
-                        var configFile = string.Empty;
-                        switch (appVersion)
-                        {
-                            case "dev":
-                            case "uat":
-                            case "prod":
-                            default:
-                                configFile = $"Config.{appVersion}.json";
-                                break;
-                        }
+                        //var configFile = string.Empty;
+                        //switch (appVersion)
+                        //{
+                        //    case "dev":
+                        //    case "uat":
+                        //    case "prod":
+                        //    default:
+                        //        configFile = $"Config.{appVersion}.json";
+                        //        break;
+                        //}
+                        var configFile = "Config.json";
                         var configuration = new ConfigurationBuilder();
                         configuration.AddJsonFile(configFile);
                         return configuration.Build()[name];

@@ -10,5 +10,6 @@ namespace Druk.DB.Entity
     [Serializable]
     public class BaseEntity
     {
+        public virtual  int id { get; set; }
     }
 }

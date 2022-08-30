@@ -1,4 +1,6 @@
-﻿using Druk.API.CMS.Util;
+﻿using Druk.API.CMS.Operation;
+using Druk.API.CMS.Util;
+using Druk.Common.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,13 +16,21 @@ namespace Druk.API.CMS.Controllers
     public class AdminController : BaseController
     {
         /// <summary>
-        /// 管理员登录
+        /// 增加管理员
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult login()
+        public JsonResponse Add(AdminPJson adminPjson)
         {
-            return Ok("请求成功");
+            if (adminPjson == null)
+            {
+                return ErrorPara();
+            }
+            if (!OperationAdmin.Add(adminPjson))
+            {
+                return ErrorResult();
+            }
+            return SuccessResult();
         }
     }
 }

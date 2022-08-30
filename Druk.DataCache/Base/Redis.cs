@@ -38,18 +38,8 @@ namespace Druk.DataCache.Base
                 #region //监测连接状态,若无效则重新连接,并清理现有库连接对象
                 if (Connection == null || !Connection.IsConnected)
                 {
-                    string connStr = Config.Redis_ServerPath; // 读取redis连接
-                    switch (Druk.Common.Config.appVersion)
-                    {
-                        case "dev":
-                            connStr = connStr
-                                .Replace("57", "57pd")
-                                .Replace("r-uf6hog0s1uyui1jiws", "r-uf6hog0s1uyui1jiwspd");
-                            //connStr = connStr.Replace("r-uf6kh3eyq9hejy1l8c", "r-uf6kh3eyq9hejy1l8cpd");
-                            break;
-                    }
-                    Console.WriteLine("Redis-Conn-Str: " + connStr);
-
+                    string connStr = Config.Redis_ServerPath; // 读取redis连接 
+                    Console.WriteLine("Redis-Conn-Str: " + connStr); 
                     Connection = ConnectionMultiplexer.Connect(connStr);
                     Dic_DB.Clear(); //清除现有的库连接
                 }

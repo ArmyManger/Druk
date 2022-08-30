@@ -21,8 +21,8 @@ namespace Druk.DB
         /// <summary>
         ///加密值。生成器： https://suijimimashengcheng.51240.com/
         /// </summary>
-        public static string key = "M1q!7WKkbW#Uz!tpdOdN3k*rdaAK2K0L";    //32位
-        public static string iv = "Tg#2qhm6QE69LspB";   //16位
+        public static string key = "VZXp2Y8N3IszhwTpsz4BKQrv6HrNljNK";    //32位
+        public static string iv = "4ORYvHbBr6Ux1XCj";   //16位
         #endregion
 
         #region 系统基础数据库

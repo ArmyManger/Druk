@@ -9,9 +9,20 @@
             管理员
             </summary>
         </member>
-        <member name="M:Druk.API.CMS.Controllers.AdminController.login">
+        <member name="M:Druk.API.CMS.Controllers.AdminController.Add(Druk.API.CMS.AdminPJson)">
             <summary>
-            管理员登录
+            增加管理员
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Druk.API.CMS.Controllers.TestController">
+            <summary>
+            测试控制器
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Controllers.TestController.SqlAesEncrypt(System.String)">
+            <summary>
+            
             </summary>
             <returns></returns>
         </member>
@@ -44,6 +55,23 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
+        <member name="T:Druk.API.CMS.AdminPJson">
+            <summary>
+            请求类
+            </summary>
+        </member>
+        <member name="T:Druk.API.CMS.Operation.OperationAdmin">
+            <summary>
+            业务处理类
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Operation.OperationAdmin.Add(Druk.API.CMS.AdminPJson)">
+            <summary>
+            添加会员
+            </summary>
+            <param name="adminPjson"></param>
+            <returns></returns>
+        </member>
         <member name="T:Druk.API.CMS.Startup">
             <summary>
             启动
@@ -53,6 +81,14 @@
             <summary>
             过滤器
             </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Util.BaseController.ErrorPara(System.String,Druk.Common.ComEnum.Code,System.Object)">
+            <summary>
+            参数错误
+            </summary>
+            <param name="code"></param>
+            <param name="error"></param>
+            <returns></returns>
         </member>
         <member name="M:Druk.API.CMS.Util.BaseController.ErrorResult(Druk.Common.ComEnum.Code,System.String,System.Object)">
             <summary>
