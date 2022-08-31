@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Druk.Common
 {
-
+    /// <summary>
+    /// 工具类
+    /// </summary>
     public static class Tools
     {
         #region //根据枚举值返回对应的JsonR
@@ -128,6 +130,6 @@ namespace Druk.Common
         {
             return new PagedResult<T>(items, totalCount, page, pageSize);
         }
-    } 
+    }
     #endregion
 }

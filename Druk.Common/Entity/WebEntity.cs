@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Druk.Common.Entity
 {
-    #region JsonR 接口返回的Json对象
+    #region JsonResponse 接口返回的Json对象
     [Serializable]
     public class JsonResponse
     {
@@ -29,7 +29,7 @@ namespace Druk.Common.Entity
     }
     #endregion
 
-    #region JsonR 接口返回的Json对象
+    #region JsonResponse 接口返回的Json对象
     [Serializable]
     public class JsonResponse<T>
     {

@@ -10,8 +10,8 @@ namespace Druk.DB.Entity
     /// 管理员类
     /// </summary>
     [Serializable, XmlRoot(ElementName = "Admin")]
-    [Table("Admin")]
-    public class Admin
+    [Table("t_Admin")]
+    public class Admin : BaseEntity
     {
         public virtual string name { get; set; }
 
@@ -19,6 +19,6 @@ namespace Druk.DB.Entity
 
         public virtual string pwd { get; set; }
 
-        public virtual string phone { get; set; } 
+        public virtual string phone { get; set; }
     }
 }

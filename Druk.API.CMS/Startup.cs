@@ -69,7 +69,7 @@ namespace Druk.API.CMS
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => { });
             services.AddControllersWithViews(option =>
             {
-                option.Filters.Add(typeof(Util.AuthorizeFilter)); //并添加自定义过滤器
+                option.Filters.Add(typeof(Util.MyAuthorizeFilter)); //并添加自定义过滤器
                 option.RespectBrowserAcceptHeader = true;
             });
             #endregion

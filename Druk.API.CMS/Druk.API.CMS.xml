@@ -31,12 +31,6 @@
             用户
              </summary>
         </member>
-        <member name="M:Druk.API.CMS.Controllers.UserController.Add(Druk.API.CMS.Model.UserModel)">
-            <summary>
-            新增用户
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Druk.API.CMS.Controllers.UserController.List(System.String,System.Int32,System.Int32)">
             <summary>
             获取用户列表
@@ -77,9 +71,49 @@
             启动
             </summary>
         </member>
-        <member name="T:Druk.API.CMS.Util.AuthorizeFilter">
+        <member name="T:Druk.API.CMS.Util.OnlyReadDBAttribute">
             <summary>
-            过滤器
+             只读查询
+            </summary>
+        </member>
+        <member name="T:Druk.API.CMS.Util.MyAuthorizeFilter">
+            <summary>
+            自定义拦截器 过滤权限
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Util.MyAuthorizeFilter.#ctor">
+            <summary>
+            拦截器 过滤权限
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Util.MyAuthorizeFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+            <summary>
+            业务访问前执行 过滤权限
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Druk.API.CMS.Util.ExecutedFilter">
+            <summary>
+            业务程序处理完成之后
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Util.ExecutedFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            业务程序处理完成之后
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Util.ExecutedFilter.GetContextInfo(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Int32)">
+            <summary>
+            获取上下文信息
+            </summary>
+            <param name="context"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Druk.API.CMS.Util.GetFilterOfTimmer">
+            <summary>
+            获取当前请求中的计时器
             </summary>
         </member>
         <member name="M:Druk.API.CMS.Util.BaseController.ErrorPara(System.String,Druk.Common.ComEnum.Code,System.Object)">

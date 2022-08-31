@@ -17,3 +17,4 @@ D:\学习区\druk-make\Druk_M\Druk.DataCache\bin\Debug\netcoreapp3.1\Druk.Log.pd
 D:\学习区\druk-make\Druk_M\Druk.DataCache\bin\Debug\netcoreapp3.1\Druk.RabbitMQ.pdb
 D:\学习区\druk-make\Druk_M\Druk.DataCache\obj\Debug\netcoreapp3.1\Druk.DataCache.dll
 D:\学习区\druk-make\Druk_M\Druk.DataCache\obj\Debug\netcoreapp3.1\Druk.DataCache.pdb
+D:\学习区\druk-make\Druk_M\Druk.DataCache\obj\Debug\netcoreapp3.1\Druk.DataCache.csproj.CopyComplete

@@ -69,10 +69,7 @@ D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Swashbuckle.A
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
-D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.API.CMS.Model.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.Common.dll
-D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.API.CMS.Model.pdb
-D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.API.CMS.Model.xml
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.Common.pdb
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.csproj.AssemblyReference.cache
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.GeneratedMSBuildEditorConfig.editorconfig

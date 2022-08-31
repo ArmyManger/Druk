@@ -114,9 +114,23 @@ namespace Druk.Common
             请求成功 = 9,
             [Description("请求失败")]
             请求失败 = 10,
+
             [Description("程序异常")]
             程序异常 = 500,
-            #endregion 
+            #endregion
+
+            [Description("未登录")]
+            未登录 = 20,
+            [Description("Token失效")]
+            Token失效 = 21,
+            
+
+            #region 权限
+            [Description("无权限")]
+            无权限 = 100,
+            [Description("未找到对应权限")]
+            未找到对应权限 = 101, 
+            #endregion
         } 
         #endregion
     }

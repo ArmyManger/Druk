@@ -1,5 +1,4 @@
-﻿using Druk.API.CMS.Model;
-using Druk.API.CMS.Util;
+﻿using Druk.API.CMS.Util;
 using Druk.Common.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,16 +15,6 @@ namespace Druk.API.CMS.Controllers
     public class UserController : BaseController
     {
         /// <summary>
-        /// 新增用户
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public IActionResult Add(UserModel usermodel)
-        {
-            return Ok("请求成功");
-        }
-
-        /// <summary>
         /// 获取用户列表
         /// </summary>
         /// <param name="keyWord"></param>
@@ -35,7 +24,7 @@ namespace Druk.API.CMS.Controllers
         [HttpGet]
         public JsonResponse List(string keyWord = "", int page = 1, int pageSize = Common.Config.DefaultPageSize)
         {
-          
+
             return SuccessResult();
         }
 

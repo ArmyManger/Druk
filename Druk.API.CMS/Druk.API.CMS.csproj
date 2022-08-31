@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Druk.API.CMS.Model\Druk.API.CMS.Model.csproj" />
     <ProjectReference Include="..\Druk.Common\Druk.Common.csproj" />
     <ProjectReference Include="..\Druk.DataCache\Druk.DataCache.csproj" />
   </ItemGroup>
