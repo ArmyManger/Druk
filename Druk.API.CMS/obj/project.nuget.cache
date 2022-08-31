@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zXH50eKstzJwOW0cUzwxcc+5fAyvlxE82EBUX0abRN40oOgrrRIwJv5D2XocKpZaaKJvvxI/yM/zHHxi/F4Ghg==",
+  "dgSpecHash": "HWAhFfyRneCqbUC0oJHMpu3tz9gBs7bcRfyTU/q2ds4ZBjmmTYEJropAX0uAhjkCikc6irFxSgz3Xmzunvd9vQ==",
   "success": true,
   "projectFilePath": "D:\\学习区\\druk-make\\Druk_M\\Druk.API.CMS\\Druk.API.CMS.csproj",
   "expectedPackageFiles": [
@@ -36,6 +36,7 @@
     "C:\\Users\\EDZ\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\msgpack.cli\\1.0.1\\msgpack.cli.1.0.1.nupkg.sha512",
