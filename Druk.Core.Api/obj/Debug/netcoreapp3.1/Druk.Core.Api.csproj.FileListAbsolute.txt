@@ -83,3 +83,9 @@ D:\学习区\druk-make\Druk_M\Druk.Core.Api\obj\Debug\netcoreapp3.1\Druk.Core.Ap
 D:\学习区\druk-make\Druk_M\Druk.Core.Api\obj\Debug\netcoreapp3.1\Druk.Core.Api.dll
 D:\学习区\druk-make\Druk_M\Druk.Core.Api\obj\Debug\netcoreapp3.1\Druk.Core.Api.pdb
 D:\学习区\druk-make\Druk_M\Druk.Core.Api\obj\Debug\netcoreapp3.1\Druk.Core.Api.genruntimeconfig.cache
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\obj\Debug\netcoreapp3.1\Druk.Core.Api.MvcApplicationPartsAssemblyInfo.cs
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Druk.Core.Api.xml

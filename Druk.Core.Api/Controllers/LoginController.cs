@@ -1,4 +1,5 @@
 ﻿using Druk.Core.Api.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -11,7 +12,9 @@ using System.Threading.Tasks;
 
 namespace Druk.Core.Api.Controllers
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
     public class LoginController : BaseApiController
     {
         /// <summary>
@@ -19,6 +22,7 @@ namespace Druk.Core.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index(string username, string password)
         {
 

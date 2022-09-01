@@ -34,7 +34,8 @@ namespace Druk.Core.Api
             //services.AddSingleton<IConfiguration>(Configuration);
             //添加JWT验证
             services.AddJwt();
-
+            //添加swagger
+            services.AddSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +53,13 @@ namespace Druk.Core.Api
             app.UseAuthentication(); 
             //授权
             app.UseAuthorization();
-     
+            //注册使用swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Druk.Core.Api v1");
+                c.RoutePrefix = "swagger";
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

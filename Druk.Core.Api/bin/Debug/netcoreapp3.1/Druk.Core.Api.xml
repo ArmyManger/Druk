@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Druk.Core.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Druk.Core.Api.Controllers.LoginController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Druk.Core.Api.Controllers.LoginController.Index(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Druk.Core.Api.Controllers.LoginController.List">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Druk.Core.Api.Controllers.LoginController.Add">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Druk.Core.Api.Util.SwaggerSetUp.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加服务
+            </summary>
+            <param name="services"></param>
+        </member>
+    </members>
+</doc>
