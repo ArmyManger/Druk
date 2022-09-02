@@ -1,0 +1,10 @@
+D:\学习区\druk-make\Druk_M\Druk.IServices\bin\Debug\netcoreapp3.1\Druk.IServices.deps.json
+D:\学习区\druk-make\Druk_M\Druk.IServices\bin\Debug\netcoreapp3.1\Druk.IServices.dll
+D:\学习区\druk-make\Druk_M\Druk.IServices\bin\Debug\netcoreapp3.1\Druk.IServices.pdb
+D:\学习区\druk-make\Druk_M\Druk.IServices\obj\Debug\netcoreapp3.1\Druk.IServices.csproj.AssemblyReference.cache
+D:\学习区\druk-make\Druk_M\Druk.IServices\obj\Debug\netcoreapp3.1\Druk.IServices.GeneratedMSBuildEditorConfig.editorconfig
+D:\学习区\druk-make\Druk_M\Druk.IServices\obj\Debug\netcoreapp3.1\Druk.IServices.AssemblyInfoInputs.cache
+D:\学习区\druk-make\Druk_M\Druk.IServices\obj\Debug\netcoreapp3.1\Druk.IServices.AssemblyInfo.cs
+D:\学习区\druk-make\Druk_M\Druk.IServices\obj\Debug\netcoreapp3.1\Druk.IServices.csproj.CoreCompileInputs.cache
+D:\学习区\druk-make\Druk_M\Druk.IServices\obj\Debug\netcoreapp3.1\Druk.IServices.dll
+D:\学习区\druk-make\Druk_M\Druk.IServices\obj\Debug\netcoreapp3.1\Druk.IServices.pdb

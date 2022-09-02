@@ -13,3 +13,4 @@ D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.dll
 D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.pdb
 D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\Druk.RabbitMQ.dll
 D:\学习区\druk-make\Druk_M\Druk.Log\bin\Debug\netcoreapp3.1\Druk.RabbitMQ.pdb
+D:\学习区\druk-make\Druk_M\Druk.Log\obj\Debug\netcoreapp3.1\Druk.Log.csproj.CopyComplete
