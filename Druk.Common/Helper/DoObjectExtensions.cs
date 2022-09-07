@@ -1,5 +1,6 @@
 ﻿using Ganss.XSS;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,10 +18,42 @@ using System.Xml.Serialization;
 namespace Druk.Common
 {
     /// <summary>
-    /// 
+    /// 对象扩展操作
     /// </summary>
     public static class DoObjectExtensions
     {
+        #region //获取对象的字段
+
+        /// <summary>
+        /// 提取对象的字段并用逗号分隔组合（字段将排除List里的）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="excludeField">需要排除的字段</param>
+        /// <returns></returns>
+        public static string ToFields<T>(this List<string> excludeField) where T : class
+        {
+            List<string> fields = new List<string>();
+            var type = typeof(T);
+            var properties = type.GetProperties();
+            if (properties != null && properties.Length > 0)
+            {
+                for (int i = 0; i < properties.Length; i++)
+                {
+                    if (excludeField.Count > 0)
+                    {
+                        if (!excludeField.Contains(properties[i].Name.ToLower()))
+                            fields.Add(properties[i].Name);
+                    }
+                    else
+                        fields.Add(properties[i].Name);
+
+                }
+            }
+            return string.Join(",", fields.ToArray());
+        }
+        #endregion
+
+
         #region //this Byte[]
 
 
@@ -54,7 +88,7 @@ namespace Druk.Common
             return Obj.ToList().ToLower().ToArray();
         }
         /// <summary>
-        /// List
+        /// List<string>
         /// </summary>内所有元素转换为小写
         /// <param name="Obj"></param>
         /// <returns></returns>
@@ -78,7 +112,7 @@ namespace Druk.Common
             return Obj.ToList().ToUpper().ToArray();
         }
         /// <summary>
-        /// List
+        /// List<string>
         /// </summary>内所有元素转换为小写
         /// <param name="Obj"></param>
         /// <returns></returns>
@@ -153,8 +187,14 @@ namespace Druk.Common
         public static int ToInt(this object obj) { return obj.ToInt(0); }
         public static int ToInt(this object obj, int defValue)
         {
-            obj = obj ?? defValue; int def; if (int.TryParse(obj.ToString(), out def)) { return def; }
-            try { var dou = obj.ToDouble(); return Convert.ToInt32(dou >= 0 ? Math.Floor(dou) : Math.Ceiling(dou)); } catch { return defValue; }
+            if (obj == null) return defValue;
+            obj = obj ?? defValue;
+            int def;
+            var str = obj.ToString();
+            if (obj.ToString().Contains("."))
+                str = obj.ToString().Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries)[0];
+            int.TryParse(str, out def);
+            return def;//  return def == 0 ? defValue : def;
         }
         public static byte ToByte(this object obj) { return obj.ToByte(0); }
         public static byte ToByte(this object obj, byte defValue) { obj = obj ?? defValue; byte def; byte.TryParse(obj.ToString(), out def); return def == 0 ? defValue : def; }
@@ -170,6 +210,8 @@ namespace Druk.Common
         public static float ToFloat(this object obj, float defValue) { obj = obj ?? defValue; float def; float.TryParse(obj.ToString(), out def); return def == 0 ? defValue : def; }
         public static double ToDouble(this object obj) { return obj.ToDouble(0); }
         public static double ToDouble(this object obj, double defValue) { obj = obj ?? defValue; double def; double.TryParse(obj.ToString(), out def); return def == 0 ? defValue : def; }
+        public static bool ToStringBool(this object obj) { return obj.ToStringBool(false); }
+        public static bool ToStringBool(this object obj, bool defValue) { bool def; var isok = bool.TryParse(obj?.ToString(), out def); return isok ? def : defValue; }
         public static bool ToBool(this object obj) { return obj.ToBool(false); }
         public static bool ToBool(this object obj, bool defValue) { obj = obj ?? defValue; bool def; bool.TryParse(obj.ToString(), out def); return !def ? defValue : def; }
         public static DateTime ToDateTime(this object obj) { return obj.ToDateTime(Config.DefaultDateTime); }
@@ -237,6 +279,26 @@ namespace Druk.Common
             }
             return value.ConvertTo<T>();
         }
+
+        /// <summary>
+        /// 执行对象的深层复制
+        /// </summary>
+        /// <typeparam name="T">要复制的对象的类型</typeparam>
+        /// <param name="obj">要复制的对象实例</param>
+        /// <returns>The copied object.</returns>
+        public static T DeepClone<T>(this T obj) where T : class
+        {
+            object retval;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                DataContractSerializer ser = new DataContractSerializer(typeof(T));
+                ser.WriteObject(ms, obj);
+                ms.Seek(0, SeekOrigin.Begin);
+                retval = ser.ReadObject(ms);
+                ms.Close();
+            }
+            return (T)retval;
+        }
         #endregion
 
         #region //判断对象类型
@@ -248,12 +310,11 @@ namespace Druk.Common
         /// <summary>
         /// 验证是否为正整数
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="str"></param>
         /// <returns></returns>
         public static bool IsInt(this object obj) { return obj.ToInt().ToString() == obj.ToString(); }
         /// <summary>
         /// 验证是否为Double
-        /// </summary>
         /// <returns></returns>
         public static bool IsDouble(this object obj) { return obj.ToDouble().ToString() == obj.ToString(); }
         /// <summary>
@@ -264,11 +325,11 @@ namespace Druk.Common
         public static bool IsDateTime(this object obj) { DateTime defValue; return obj != null && DateTime.TryParse(obj.ToString(), out defValue); }
         /// <summary>
         /// 判断对象是否为数组
-        /// </summary>
+        /// </returns>
         public static bool IsArrayType(this object obj) { return obj.IsType(typeof(Array)); }
         /// <summary>
         /// 判断给定的数组(strNumber)中的数据是不是都为数值型
-        /// </summary>
+        /// <returns>
         public static bool IsIntArray(this object[] strNumber)
         {
             if (strNumber == null) { return false; }
@@ -277,9 +338,22 @@ namespace Druk.Common
             return true;
         }
         /// <summary>
+        /// 验证对象是否为Null
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsNull(this object obj) { return obj == null; }
+
+        /// <summary>
+        /// 判断对象是否不为Null
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsNotNull(this object obj) { return obj != null; }
+        /// <summary>
         /// 验证对象是否为DBNull
         /// DBNull主要应用于数据库
-        /// </summary>
+        /// </returns>
         public static bool IsDBNullType(this object obj) { return obj.IsType(typeof(DBNull)); }
 
         /// <summary>
@@ -299,6 +373,86 @@ namespace Druk.Common
         {
             return !o.IsClass && !o.IsInterface && o.GetInterfaces().Any(q => q == typeof(IFormattable));
         }
+
+        /// <summary>
+        /// 判断对象是否为空
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsNullOrEmpty(this string obj) => string.IsNullOrEmpty(obj);
+
+        /// <summary>
+        /// 判断对象是否不为空
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsNotNullOrEmpty(this string obj) => string.IsNullOrEmpty(obj) == false;
+
+        /// <summary>
+        /// 判断对象是否为空
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> obj) => obj?.Any() != true;
+
+        /// <summary>
+        /// 判断对象是否不为空
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsNotNullOrEmpty<T>(this IEnumerable<T> obj) => obj?.Any() == true;
+        /// <summary>
+        /// 判断对象是否为 true
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static bool IsTrue(this bool b) => b == true;
+        /// <summary>
+        /// 判断对象是否为 false
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static bool IsFalse(this bool b) => b == false;
+        /// <summary>
+        /// 判断对象是否为 true
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static bool IsTrue(this bool? b) => b == true;
+        /// <summary>
+        /// 判断对象是否为 false
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static bool IsFalse(this bool? b) => b == false;
+        /// <summary>
+        /// 判断对象是否为 null 或 false
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static bool IsNullOrFalse(this bool? b) => b == null || b == false;
+        /// <summary>
+        /// To Sql Like
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string ToSqlLike(this string s) => $"%{s}%";
+
+        /// <summary>
+        /// To Sql  Right Like
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string ToSqlRightLike(this string s) => $"{s}%";
+
+        /// <summary>
+        /// To Sql  Left Like
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string ToSqlLeftLike(this string s) => $"%{s}";
         #endregion
 
         #endregion
@@ -548,7 +702,7 @@ namespace Druk.Common
         #region //Json <=> T
 
         /// <summary>
-        /// To the json.
+        /// Toes the json.
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <returns></returns>
@@ -556,6 +710,37 @@ namespace Druk.Common
         {
             try
             {
+                if (obj == null) return "";
+                return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+
+
+        /// <summary>
+        /// To the json.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="isLowerCamel">是否自定义属性值为小骆驼命名</param>
+        /// <returns></returns>
+        public static string ToJson(this object obj, bool isLowerCamel = false)
+        {
+            try
+            {
+                if (isLowerCamel)
+                {
+                    var setting = new Newtonsoft.Json.JsonSerializerSettings
+                    {
+                        ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+                    };
+
+                    return Newtonsoft.Json.JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.None, setting);
+                }
+
                 return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
             }
             catch (TargetInvocationException)
@@ -566,7 +751,7 @@ namespace Druk.Common
             {
                 return string.Empty;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Newtonsoft.Json.JsonSerializerSettings setting = new Newtonsoft.Json.JsonSerializerSettings();
                 setting.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -574,20 +759,18 @@ namespace Druk.Common
             }
         }
 
+
         /// <summary>
         /// json转对象
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="str">The STR.</param>
         /// <returns></returns>
         public static object ToObjectFromJson(this string str)
         {
             try
             {
-                if (str.StartsWith('{') || str.StartsWith('['))
-                {
-                    return Newtonsoft.Json.JsonConvert.DeserializeObject(str);
-                }
-                return str;
+                return Newtonsoft.Json.JsonConvert.DeserializeObject(str);
             }
             catch (Exception ex)
             {
@@ -606,17 +789,14 @@ namespace Druk.Common
         {
             try
             {
-                if (str.StartsWith('{') || str.StartsWith('['))
-                {
-                    var aaa = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(str);
-
-                    return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(str);
-                }
-                return null;
+                if (string.IsNullOrEmpty(str))
+                    return null;
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(str);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+
+
                 return null;
             }
         }
@@ -786,6 +966,41 @@ namespace Druk.Common
 
         #endregion
 
+        #region //特殊判断 手机 邮箱
+
+        /// <summary>
+        /// 判断是否是手机号码
+        /// </summary>
+        public static bool IsMobile(this string str) { return str.IsMatch(@"^1[3|4|5|7|8]\d{9}$"); }
+
+        #endregion
+
+        #region 替换字符
+
+        /// <summary>
+        /// 替换字符
+        /// </summary>
+        /// <param name="str">原字符串</param>
+        /// <param name="start">开始替换的位置（下标0开始）</param>
+        /// <param name="legth">需要替换的字符长度</param>
+        /// <param name="specialStr">替换的字符</param>
+        /// <returns></returns>
+        public static string ReplaceSpecialChar(this string str, int start, int legth, string specialStr)
+        {
+
+            if (string.IsNullOrEmpty(str)) return "";
+            var arrty = str.ToCharArray();
+            var newChar = "";
+            for (int i = 0; i < arrty.Length; i++)
+            {
+                if (i >= start && i < start + legth)
+                    newChar += specialStr;
+                else
+                    newChar += arrty[i];
+            }
+            return newChar;
+        }
+        #endregion
         #endregion
 
         #region //this Random 随机数
@@ -798,7 +1013,7 @@ namespace Druk.Common
         /// <summary>
         /// 随机枚举
         /// </summary>
-        public static T NextEnum<T>(this Random random) where T : struct
+        public static T Qianlanum<T>(this Random random) where T : struct
         {
             Type type = typeof(T);
             if (type.IsEnum == false) throw new InvalidOperationException(); //如果不是枚举..抛异常
@@ -869,7 +1084,7 @@ namespace Druk.Common
         /// </summary>
         /// <param name="replaceExisted">如果已存在，是否替换,</param>
         /// <returns></returns>
-        public static Dictionary<TKey, TValue> AddRange<TKey, TValue>(this Dictionary<TKey, TValue> dict, Dictionary<TKey, TValue> values, bool replaceExisted)
+        public static Dictionary<TKey, TValue> AddRange<TKey, TValue>(this Dictionary<TKey, TValue> dict, IEnumerable<KeyValuePair<TKey, TValue>> values, bool replaceExisted)
         {
             foreach (var item in values)
             {
@@ -966,7 +1181,7 @@ namespace Druk.Common
         /// <param name="includeUpperBound">if set to <c>true</c> [include upper bound].</param>
         /// <returns>
         ///   <c>true</c> if the specified t is between; otherwise, <c>false</c>.
-        /// </summary>
+        /// </returns>
         public static bool IsBetween<T>(this T t, T lowerBound, T upperBound, bool includeLowerBound = false, bool includeUpperBound = false) where T : class, IComparable<T>
         {
             if (t == null) throw new ArgumentNullException("t");
@@ -989,7 +1204,7 @@ namespace Druk.Common
         /// <param name="includeUpperBound">if set to <c>true</c> [include upper bound].</param>
         /// <returns>
         ///   <c>true</c> if the specified t is between; otherwise, <c>false</c>.
-        /// </summary>
+        /// </returns>
         public static bool IsBetween<T>(this T t, T lowerBound, T upperBound, IComparer<T> comparer, bool includeLowerBound = false, bool includeUpperBound = false)
         {
             if (comparer == null) throw new ArgumentNullException("comparer");
@@ -1003,25 +1218,52 @@ namespace Druk.Common
         }
         #endregion
 
-
+        /// <summary>
+        /// 对象转JSON并忽略为null的属性
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string ToJsonIgnoreNull(this object obj, Formatting formatting = Formatting.None)
+        {
+            string json_string = JsonConvert.SerializeObject(obj, formatting, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            return json_string;
+        }
         #region //对象过滤
         /// <summary>
         /// 返回安全的entity对象
         /// </summary>
+        /// <typeparam name="T">entity对象的类型</typeparam>
         /// <param name="model">entity对象</param>
+        /// <param name="replce">是否替换单引号</param>
         /// <returns>安全的entity对象</returns>
-        public static object ReturnSecurityObject(this object model)
+        public static object ReturnSecurityObject(this object model, bool replce = false, string replceStr = "")
         {
+            if (model == null) return "";
             var sanitizer = new HtmlSanitizer();
             Type t = model.GetType();//获取类型
-            foreach (PropertyInfo propertyInfo in t.GetProperties())//遍历该类型下所有属性
+            if (t == "".GetType())
             {
-                if (propertyInfo.PropertyType == "".GetType())//如果属性为string类型
+                var str = sanitizer.Sanitize(model.ToString());
+                if (replce)
+                    str = str.Replace("'", replceStr);
+                model = str;
+            }
+            else
+            {
+
+                foreach (PropertyInfo propertyInfo in t.GetProperties())//遍历该类型下所有属性
                 {
-                    var inputString = (propertyInfo.GetValue(model) ?? "").ToString();
-                    propertyInfo.SetValue(model, sanitizer.Sanitize(inputString));//将过滤后的值设置给传入的对象
+                    if (propertyInfo.PropertyType == "".GetType())//如果属性为string类型
+                    {
+                        var inputString = (propertyInfo.GetValue(model) ?? "").ToString();
+                        var str = sanitizer.Sanitize(inputString);
+                        if (replce)
+                            str = str.Replace("'", replceStr);
+                        propertyInfo.SetValue(model, str.Trim());//将过滤后的值设置给传入的对象
+                    }
                 }
             }
+
             return model;//返回安全对象
         }
         #endregion
