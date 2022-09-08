@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.9.101" />
+    <PackageReference Include="Senparc.Weixin.Open" Version="4.7.101" />
+    <PackageReference Include="Senparc.Weixin.TenPay" Version="1.5.101" />
+    <PackageReference Include="Senparc.Weixin.Work" Version="3.7.101" />
+    <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.7.101" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Druk.Common\Druk.Common.csproj" />
+    <ProjectReference Include="..\Druk.DataCache\Druk.DataCache.csproj" />
+    <ProjectReference Include="..\Druk.Log\Druk.Log.csproj" />
+  </ItemGroup>
+
+</Project>
