@@ -1,0 +1,479 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\学习区\\druk-make\\Druk_M\\Druk.Handle\\Druk.Handle.csproj": {}
+  },
+  "projects": {
+    "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj",
+        "projectName": "Druk.Common",
+        "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj",
+        "packagesPath": "C:\\Users\\EDZ\\.nuget\\packages\\",
+        "outputPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\EDZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Aliyun.OSS.SDK.NetCore": {
+              "target": "Package",
+              "version": "[2.13.0, )"
+            },
+            "FluentFTP": {
+              "target": "Package",
+              "version": "[19.2.2, )"
+            },
+            "HtmlSanitizer": {
+              "target": "Package",
+              "version": "[7.1.542, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.28, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.5.6, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.0, )"
+            },
+            "System.Diagnostics.PerformanceCounter": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "ZKWeb.System.Drawing": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\学习区\\druk-make\\Druk_M\\Druk.DataCache\\Druk.DataCache.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\学习区\\druk-make\\Druk_M\\Druk.DataCache\\Druk.DataCache.csproj",
+        "projectName": "Druk.DataCache",
+        "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.DataCache\\Druk.DataCache.csproj",
+        "packagesPath": "C:\\Users\\EDZ\\.nuget\\packages\\",
+        "outputPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.DataCache\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\EDZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj"
+              },
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.DB\\Druk.DB.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.DB\\Druk.DB.csproj"
+              },
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.Log\\Druk.Log.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Log\\Druk.Log.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "VIEApps.Enyim.Caching": {
+              "target": "Package",
+              "version": "[5.0.2207.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\学习区\\druk-make\\Druk_M\\Druk.DB\\Druk.DB.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\学习区\\druk-make\\Druk_M\\Druk.DB\\Druk.DB.csproj",
+        "projectName": "Druk.DB",
+        "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.DB\\Druk.DB.csproj",
+        "packagesPath": "C:\\Users\\EDZ\\.nuget\\packages\\",
+        "outputPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.DB\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\EDZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.35, )"
+            },
+            "HtmlSanitizer": {
+              "target": "Package",
+              "version": "[7.1.542, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\学习区\\druk-make\\Druk_M\\Druk.Handle\\Druk.Handle.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\学习区\\druk-make\\Druk_M\\Druk.Handle\\Druk.Handle.csproj",
+        "projectName": "Druk.Handle",
+        "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Handle\\Druk.Handle.csproj",
+        "packagesPath": "C:\\Users\\EDZ\\.nuget\\packages\\",
+        "outputPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Handle\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\EDZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj"
+              },
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.DataCache\\Druk.DataCache.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.DataCache\\Druk.DataCache.csproj"
+              },
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.DB\\Druk.DB.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.DB\\Druk.DB.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\学习区\\druk-make\\Druk_M\\Druk.Log\\Druk.Log.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\学习区\\druk-make\\Druk_M\\Druk.Log\\Druk.Log.csproj",
+        "projectName": "Druk.Log",
+        "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Log\\Druk.Log.csproj",
+        "packagesPath": "C:\\Users\\EDZ\\.nuget\\packages\\",
+        "outputPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Log\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\EDZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj"
+              },
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.RabbitMQ\\Druk.RabbitMQ.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.RabbitMQ\\Druk.RabbitMQ.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.15, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\学习区\\druk-make\\Druk_M\\Druk.RabbitMQ\\Druk.RabbitMQ.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\学习区\\druk-make\\Druk_M\\Druk.RabbitMQ\\Druk.RabbitMQ.csproj",
+        "projectName": "Druk.RabbitMQ",
+        "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.RabbitMQ\\Druk.RabbitMQ.csproj",
+        "packagesPath": "C:\\Users\\EDZ\\.nuget\\packages\\",
+        "outputPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.RabbitMQ\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\EDZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj": {
+                "projectPath": "D:\\学习区\\druk-make\\Druk_M\\Druk.Common\\Druk.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
