@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Druk.Common\Druk.Common.csproj" />
     <ProjectReference Include="..\Druk.DataCache\Druk.DataCache.csproj" />
+    <ProjectReference Include="..\Druk.Handle\Druk.Handle.csproj" />
   </ItemGroup>
 
 </Project>

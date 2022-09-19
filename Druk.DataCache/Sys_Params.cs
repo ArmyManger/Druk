@@ -90,7 +90,7 @@ namespace Druk.DataCache
         /// </summary>
         /// <param name="name">缓存值名称</param>
         /// <returns></returns>
-        public static string GetPValue(string name)
+        public static string GetValue(string name)
         {
             if (string.IsNullOrEmpty(name)) { return null; }
             var entity = Cache.Get(CacheName + name.ToLower(), CacheNo);

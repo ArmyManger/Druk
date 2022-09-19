@@ -53,6 +53,34 @@ namespace Druk.DB
         }
         #endregion
 
+        #region 系统基础数据库
+        /// <summary>
+        /// 系统基础数据库
+        /// </summary>
+        public static SqlConnection SqlConn_Druk
+        {
+            get
+            {
+                if (Setting_SqlConn.ContainsKey("SQL.Wathet".ToLower()))
+                {
+                    return new SqlConnection() { ConnectionString = GetSqlConn("SQL.Wathet") };
+                }
+                try
+                {
+                    //读配置文件中的数据库连接
+                    var connStr = Druk.Common.ConfigJson.AppSettings["DBConnStr:SQLConnection:Druk"] ?? "";
+                    //解密数据库连接字符串
+                    connStr = Common.DoEncrypt.AesDecrypt(connStr, key, iv);
+                    return new SqlConnection() { ConnectionString = connStr };
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        #endregion
+
         #region 会员库
         /// <summary>
         /// 会员数据库链接字符串(只读)
@@ -69,7 +97,7 @@ namespace Druk.DB
             get { return GetRead(Conn_Druk_Member); }
         }
         #endregion
-         
+
         #region 工具 静态变量获取数据库连接字符串
         /// <summary>
         /// 静态变量获取数据库连接字符串

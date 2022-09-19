@@ -154,3 +154,6 @@ D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\System.Windows.Extensions.dll
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Config.json
 D:\学习区\druk-make\Druk_M\Druk.API.CMS\obj\Debug\netcoreapp3.1\Druk.API.CMS.csproj.CopyComplete
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\FluentFTP.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.Handle.dll
+D:\学习区\druk-make\Druk_M\Druk.API.CMS\bin\Debug\netcoreapp3.1\Druk.Handle.pdb

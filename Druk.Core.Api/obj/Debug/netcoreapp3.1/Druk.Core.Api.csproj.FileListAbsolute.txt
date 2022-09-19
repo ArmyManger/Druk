@@ -89,3 +89,5 @@ D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Swashbuckle.
 D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\学习区\druk-make\Druk_M\Druk.Core.Api\obj\Debug\netcoreapp3.1\Druk.Core.Api.MvcApplicationPartsAssemblyInfo.cs
 D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Druk.Core.Api.xml
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\obj\Debug\netcoreapp3.1\Druk.Core.Api.csproj.CopyComplete
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\FluentFTP.dll

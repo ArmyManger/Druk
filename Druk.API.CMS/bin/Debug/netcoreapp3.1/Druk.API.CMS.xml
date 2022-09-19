@@ -15,6 +15,23 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Druk.API.CMS.Controllers.FileController">
+            <summary>
+            文件控制器
+            </summary>
+        </member>
+        <member name="M:Druk.API.CMS.Controllers.FileController.uploadImage">
+            <summary>
+            上传文件 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Druk.API.CMS.Controllers.FileController.uploadExcel">
+            <summary>
+            上传Excel
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Druk.API.CMS.Controllers.TestController">
             <summary>
             测试控制器

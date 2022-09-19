@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[2.13.0, )"
             },
+            "FluentFTP": {
+              "target": "Package",
+              "version": "[19.2.2, )"
+            },
             "HtmlSanitizer": {
               "target": "Package",
               "version": "[7.1.542, )"
