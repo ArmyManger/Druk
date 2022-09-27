@@ -8,6 +8,7 @@
     <ProjectReference Include="..\Druk.Common\Druk.Common.csproj" />
     <ProjectReference Include="..\Druk.DataCache\Druk.DataCache.csproj" />
     <ProjectReference Include="..\Druk.DB\Druk.DB.csproj" />
+    <ProjectReference Include="..\Druk.IServices\Druk.IServices.csproj" />
   </ItemGroup>
 
 </Project>
