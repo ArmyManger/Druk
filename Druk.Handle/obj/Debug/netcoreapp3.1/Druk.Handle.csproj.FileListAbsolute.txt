@@ -20,3 +20,5 @@ D:\学习区\druk-make\Druk_M\Druk.Handle\obj\Debug\netcoreapp3.1\Druk.Handle.cs
 D:\学习区\druk-make\Druk_M\Druk.Handle\obj\Debug\netcoreapp3.1\Druk.Handle.csproj.CopyComplete
 D:\学习区\druk-make\Druk_M\Druk.Handle\obj\Debug\netcoreapp3.1\Druk.Handle.dll
 D:\学习区\druk-make\Druk_M\Druk.Handle\obj\Debug\netcoreapp3.1\Druk.Handle.pdb
+D:\学习区\druk-make\Druk_M\Druk.Handle\bin\Debug\netcoreapp3.1\Druk.IServices.dll
+D:\学习区\druk-make\Druk_M\Druk.Handle\bin\Debug\netcoreapp3.1\Druk.IServices.pdb

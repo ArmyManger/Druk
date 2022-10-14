@@ -32,6 +32,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Druk.API.CMS.Controllers.NoteController.Add(Druk.API.CMS.AdminPJson)">
+            <summary>
+            操作配置
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Druk.API.CMS.Controllers.TestController">
             <summary>
             测试控制器

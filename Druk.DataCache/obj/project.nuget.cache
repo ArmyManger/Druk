@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Py2PGhqKf+wP5R+MlQWGtL35wNxQzqYR3pqOSnq8tfWw15lf6ndwAhV9/Pz8AbVpz+ZKa3/MwqTBd4g5K+AUyA==",
+  "dgSpecHash": "rjSQ55kR9LeD7V+TSnNN/7n1JPWJwEbpSxVEtHw55fy0+gvKok6CcUDWzSuGVcfcFdH649UlIsiNMPEoNZ30CA==",
   "success": true,
   "projectFilePath": "D:\\学习区\\druk-make\\Druk_M\\Druk.DataCache\\Druk.DataCache.csproj",
   "expectedPackageFiles": [
@@ -45,6 +45,8 @@
     "C:\\Users\\EDZ\\.nuget\\packages\\npoi\\2.5.6\\npoi.2.5.6.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.0\\pipelines.sockets.unofficial.2.2.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\portable.bouncycastle\\1.8.9\\portable.bouncycastle.1.8.9.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\qrcoder\\1.3.2\\qrcoder.1.3.2.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\quartz\\3.5.0\\quartz.3.5.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\rabbitmq.client\\5.2.0\\rabbitmq.client.5.2.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
@@ -68,6 +70,8 @@
     "C:\\Users\\EDZ\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\sharpziplib\\1.3.3\\sharpziplib.1.3.3.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\ssh.net\\2016.1.0\\ssh.net.2016.1.0.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\sshnet.security.cryptography\\1.2.0\\sshnet.security.cryptography.1.2.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\stackexchange.redis\\2.2.4\\stackexchange.redis.2.2.4.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
@@ -86,6 +90,7 @@
     "C:\\Users\\EDZ\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.diagnostics.performancecounter\\6.0.1\\system.diagnostics.performancecounter.6.0.1.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\system.diagnostics.tracesource\\4.0.0\\system.diagnostics.tracesource.4.0.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.diagnostics.tracing\\4.3.0\\system.diagnostics.tracing.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
@@ -153,6 +158,9 @@
     "C:\\Users\\EDZ\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\vieapps.enyim.caching\\5.0.2207.1\\vieapps.enyim.caching.5.0.2207.1.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\zkweb.system.drawing\\4.0.1\\zkweb.system.drawing.4.0.1.nupkg.sha512"
   ],

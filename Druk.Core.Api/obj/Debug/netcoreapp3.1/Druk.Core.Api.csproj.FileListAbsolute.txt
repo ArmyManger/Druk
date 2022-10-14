@@ -91,3 +91,9 @@ D:\学习区\druk-make\Druk_M\Druk.Core.Api\obj\Debug\netcoreapp3.1\Druk.Core.Ap
 D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Druk.Core.Api.xml
 D:\学习区\druk-make\Druk_M\Druk.Core.Api\obj\Debug\netcoreapp3.1\Druk.Core.Api.csproj.CopyComplete
 D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\FluentFTP.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\QRCoder.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\UnityEngine.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Quartz.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\Renci.SshNet.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\SshNet.Security.Cryptography.dll
+D:\学习区\druk-make\Druk_M\Druk.Core.Api\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "20a00GgvSKNZADvZmv11R1KvF4TtVV5gBGMySTe3ov/II/rhBqZbVhuEeyYwvsuM6lp4h7rnrmbxXMzMgYb3Ag==",
+  "dgSpecHash": "1weXxby+rG68UfHEn6BMNULZLABpDHHpRcK3P+sUnJT2kBe0gSr8di7vYMaIifKZzigdLoOVJO3+PKoDle/m3g==",
   "success": true,
   "projectFilePath": "D:\\学习区\\druk-make\\Druk_M\\Druk.WeChat\\Druk.WeChat.csproj",
   "expectedPackageFiles": [
@@ -49,6 +49,8 @@
     "C:\\Users\\EDZ\\.nuget\\packages\\polly\\7.1.0\\polly.7.1.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\polly.extensions.http\\3.0.0\\polly.extensions.http.3.0.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\portable.bouncycastle\\1.8.9\\portable.bouncycastle.1.8.9.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\qrcoder\\1.3.2\\qrcoder.1.3.2.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\quartz\\3.5.0\\quartz.3.5.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\rabbitmq.client\\5.2.0\\rabbitmq.client.5.2.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
@@ -82,6 +84,8 @@
     "C:\\Users\\EDZ\\.nuget\\packages\\senparc.weixin.work\\3.7.101\\senparc.weixin.work.3.7.101.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\senparc.weixin.wxopen\\3.7.101\\senparc.weixin.wxopen.3.7.101.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\sharpziplib\\1.3.3\\sharpziplib.1.3.3.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\ssh.net\\2016.1.0\\ssh.net.2016.1.0.nupkg.sha512",
+    "C:\\Users\\EDZ\\.nuget\\packages\\sshnet.security.cryptography\\1.2.0\\sshnet.security.cryptography.1.2.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\stackexchange.redis\\2.2.4\\stackexchange.redis.2.2.4.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\EDZ\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
